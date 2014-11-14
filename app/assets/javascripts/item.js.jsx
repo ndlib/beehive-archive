@@ -5,15 +5,16 @@ var converter = new Showdown.converter();
 var Item = React.createClass({
   handleClick: function (e) {
     e.preventDefault();
-    React.render(<SlideForm item={this.props.item} key={this.props.item.id} />, $('#slide_form').get(0) )
-
+    this.props.onItemClick(this.props.item)
   },
   render: function() {
     //var rawMarkup = converter.makeHtml(this.props.children.toString());
     return (
       <li>
-        <a href="#" onClick={this.handleClick}>{this.props.item.title}</a>
-        <img src={this.props.item.links.tiled_image.uri } width="100" />
+        <a href="#" onClick={this.handleClick}>
+          {this.props.item.title}
+          <img src={this.props.item.links.tiled_image.uri } width="100" />
+        </a>
       </li>
     );
   }
@@ -21,9 +22,10 @@ var Item = React.createClass({
 
 var ItemList = React.createClass({
   render: function() {
+    var onClickFunction = this.props.onItemClick
     var itemNodes = this.props.data.map(function(item, index) {
       return (
-        <Item item={item} key={item.id} />
+        <Item item={item} key={item.id} onItemClick={onClickFunction} />
       );
     });
     return (
@@ -47,6 +49,9 @@ var AddItemBox = React.createClass({
       }.bind(this)
     });
   },
+  itemClick: function(item) {
+    React.render(<SlideForm item={item} key={item.id} />, $('#slide_form').get(0) )
+  },
   getInitialState: function() {
     return {data: []};
   },
@@ -58,7 +63,7 @@ var AddItemBox = React.createClass({
     return (
       <div>
         <h1>Items to Add!!</h1>
-        <ItemList data={this.state.data} />
+        <ItemList data={this.state.data} onItemClick={this.itemClick} />
       </div>
     );
   }
