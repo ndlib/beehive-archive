@@ -3,12 +3,17 @@
 var converter = new Showdown.converter();
 
 var Item = React.createClass({
+  handleClick: function (e) {
+    e.preventDefault();
+    React.render(<SlideForm item={this.props.item} key={this.props.item.id} />, $('#slide_form').get(0) )
+
+  },
   render: function() {
     //var rawMarkup = converter.makeHtml(this.props.children.toString());
     return (
       <li>
-        {this.props.title}
-        <img src={this.props.src } width="100" />
+        <a href="#" onClick={this.handleClick}>{this.props.item.title}</a>
+        <img src={this.props.item.links.tiled_image.uri } width="100" />
       </li>
     );
   }
@@ -18,7 +23,7 @@ var ItemList = React.createClass({
   render: function() {
     var itemNodes = this.props.data.map(function(item, index) {
       return (
-        <Item title={item.title} key={item.id} src={item.links.tiled_image.uri} />
+        <Item item={item} key={item.id} />
       );
     });
     return (
@@ -35,7 +40,6 @@ var AddItemBox = React.createClass({
       url: 'http://localhost:3017/collections/1/items.json?include=tiled_images',
       dataType: 'json',
       success: function(data) {
-        console.log(data)
         this.setState({data: data.items});
       }.bind(this),
       error: function(xhr, status, err) {
@@ -51,8 +55,6 @@ var AddItemBox = React.createClass({
     setInterval(this.loadItemsFromServer(), 8000);
   },
   render: function() {
-    console.log("render")
-    console.log(this.state)
     return (
       <div>
         <h1>Items to Add!!</h1>
@@ -62,14 +64,3 @@ var AddItemBox = React.createClass({
   }
 });
 
-
-$(document).on("page:change", function() {
-  var $content = $("#content");
-  return
-  if ($content.length > 0) {
-    React.render(
-      <AddItemBox />,
-      document.getElementById('content')
-    );
-  }
-})
