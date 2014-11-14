@@ -38,7 +38,10 @@ gem 'newrelic_rpm'
 
 gem 'react-rails', '~> 1.0.0.pre', github: 'reactjs/react-rails'
 
+gem 'showdown-rails'
 
+gem 'bootstrap-sass'
+gem 'autoprefixer-rails'
 
 group :development, :test do
   gem "pry"
