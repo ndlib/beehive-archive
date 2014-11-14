@@ -36,6 +36,9 @@ gem "rb-readline"
 # Server monitoring
 gem 'newrelic_rpm'
 
+gem 'react-rails', '~> 1.0.0.pre', github: 'reactjs/react-rails'
+
+
 
 group :development, :test do
   gem "pry"
