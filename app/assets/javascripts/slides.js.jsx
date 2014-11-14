@@ -17,7 +17,7 @@ var SlideForm = React.createClass({
       <form className="slideForm" onSubmit={this.handleSubmit}>
         <div className="form-group">
           <label className="control-label" forName="titleInput">Title</label>
-          <input type="text" id="titleInput" name="slide[title]" className="form-control" placeholder="Your name" ref="title" value={this.props.item.title} />
+          <input type="text" id="titleInput" name="slide[title]" className="form-control" placeholder="Your name" ref="title" defaultValue={this.props.item.title} />
         </div>
         <div className="row">
           <div className="col-md-6">
