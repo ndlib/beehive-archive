@@ -12,7 +12,7 @@ class SectionsController < ApplicationController
 
   def create
     @section = Section.new(section_params)
-
+    puts section_params
     respond_to do |format|
       if @section.save
         format.html { redirect_to @section, notice: 'Comment was successfully created.' }

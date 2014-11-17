@@ -1,15 +1,41 @@
 
 var SlideForm = React.createClass({
+  handleSectionSubmit: function(section) {
+
+    this.setState({data: section}, function() {
+      // `setState` accepts a callback. To avoid (improbable) race condition,
+      // `we'll send the ajax request right after we optimistically set the new
+      // `state.
+      $.ajax({
+        url: 'sections.json',
+        dataType: 'json',
+        type: 'POST',
+        data: { section: section },
+        success: function(data) {
+          this.setState({data: data});
+        }.bind(this),
+        error: function(xhr, status, err) {
+          console.error(this.props.url, status, err.toString());
+        }.bind(this)
+      });
+    });
+  },
   handleSubmit: function(e) {
     e.preventDefault();
-    var author = this.refs.author.getDOMNode().value.trim();
-    var text = this.refs.text.getDOMNode().value.trim();
-    if (!text || !author) {
+    var title = this.refs.title.getDOMNode().value.trim();
+    var description = this.refs.description.getDOMNode().value.trim();
+    var image = this.refs.image.getDOMNode().value.trim();
+    var item_id = this.refs.item_id.getDOMNode().value.trim();
+
+    if (!title) {
       return;
     }
-    this.props.onCommentSubmit({author: author, text: text});
-    this.refs.author.getDOMNode().value = '';
-    this.refs.text.getDOMNode().value = '';
+    console.log(title)
+    console.log(description)
+
+    this.handleSectionSubmit({title: title, description: description, image: image, item_id: item_id});
+    this.refs.title.getDOMNode().value = '';
+    this.refs.description.getDOMNode().value = '';
     return;
   },
   render: function() {
@@ -17,7 +43,7 @@ var SlideForm = React.createClass({
       <form className="slideForm" onSubmit={this.handleSubmit}>
         <div className="form-group">
           <label className="control-label" forName="titleInput">Title</label>
-          <input type="text" id="titleInput" name="slide[title]" className="form-control" placeholder="Your name" ref="title" defaultValue={this.props.item.title} />
+          <input type="text" id="titleInput" className="form-control" placeholder="Your name" ref="title" defaultValue={this.props.item.title} />
         </div>
         <div className="row">
           <div className="col-md-6">
@@ -26,10 +52,12 @@ var SlideForm = React.createClass({
           <div className="col-md-6">
             <div className="form-group">
               <label className="control-label" forName="commentDescription">Description</label>
-              <textarea className="form-control" id="commentDescription" rows="3" placeholder="Say something..." ref="description" name="slide[description]" />
+              <textarea className="form-control" id="commentDescription" rows="3" placeholder="Say something..." ref="description" />
             </div>
           </div>
         </div>
+        <input type="hidden" ref="item_id" value={this.props.item.id} />
+        <input type="hidden" ref="image" value={this.props.item.links.tiled_image.uri} />
         <div className="form-group">
           <button className="btn btn-primary">Save</button>
         </div>
@@ -37,3 +65,76 @@ var SlideForm = React.createClass({
     );
   }
 });
+
+var SectionList = React.createClass({
+  render: function() {
+    var onClickFunction = this.props.onSectionClick
+    var rows = [];
+    for (var i=0; i < this.props.data.length; i++) {
+      section = this.props.data[i]
+      rows.push(<Section section={section} key={section.id} onSectionClick={onClickFunction} />);
+      rows.push(<li className="new_panel"></li>)
+    }
+
+    return (
+      <ul>
+        {rows}
+      </ul>
+    );
+  }
+});
+
+
+var Section = React.createClass({
+  handleClick: function (e) {
+    e.preventDefault();
+    this.props.onItemClick(this.props.section)
+  },
+  render: function() {
+    //var rawMarkup = converter.makeHtml(this.props.children.toString());
+    return (
+      <li>
+        <a href="#" onClick={this.handleClick}>
+          <img src={this.props.section.image } width="300" />
+        </a>
+      </li>
+    );
+  }
+});
+
+
+var Sections = React.createClass({
+  loadSectionsFromServer: function() {
+    $.ajax({
+      url: 'sections.json',
+      dataType: 'json',
+      success: function(data) {
+        this.setState({data: data.sections});
+      }.bind(this),
+      error: function(xhr, status, err) {
+        console.error(this.props.url, status, err.toString());
+      }.bind(this)
+    });
+  },
+  getInitialState: function() {
+    return {data: []};
+  },
+  componentDidMount: function() {
+    this.loadSectionsFromServer();
+    setInterval(this.loadSectionsFromServer(), 8000);
+  },
+  sectionClick: function() {
+
+  },
+  render: function() {
+    return (
+      <div>
+        <h1>Sections</h1>
+        <SectionList data={this.state.data} onSectionClick={this.sectionClick} />
+      </div>
+    );
+  }
+
+});
+
+
