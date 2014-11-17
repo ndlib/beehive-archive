@@ -20,6 +20,9 @@ var SlideForm = React.createClass({
       });
     });
   },
+  componentDidMount: function (){
+    $('#sectionDescription').redactor({});
+  },
   handleSubmit: function(e) {
     e.preventDefault();
     var title = this.refs.title.getDOMNode().value.trim();
@@ -30,8 +33,6 @@ var SlideForm = React.createClass({
     if (!title) {
       return;
     }
-    console.log(title)
-    console.log(description)
 
     this.handleSectionSubmit({title: title, description: description, image: image, item_id: item_id});
     this.refs.title.getDOMNode().value = '';
@@ -51,8 +52,8 @@ var SlideForm = React.createClass({
           </div>
           <div className="col-md-6">
             <div className="form-group">
-              <label className="control-label" forName="commentDescription">Description</label>
-              <textarea className="form-control" id="commentDescription" rows="3" placeholder="Say something..." ref="description" />
+              <label className="control-label" forName="sectionDescription">Description</label>
+              <textarea className="form-control" id="sectionDescription" rows="3" placeholder="Say something..." ref="description" />
             </div>
           </div>
         </div>
