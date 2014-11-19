@@ -1,7 +1,7 @@
 class SectionsController < ApplicationController
 
   def index
-    @sections = Section.all
+    @sections = SectionQuery.new.all_in_exhibit
   end
 
 
@@ -11,10 +11,10 @@ class SectionsController < ApplicationController
 
 
   def create
-    @section = Section.new(section_params)
+    @section = Section.new
 
     respond_to do |format|
-      if @section.save
+      if SaveSection.call(@section, section_params)
         format.html { redirect_to @section, notice: 'Comment was successfully created.' }
         format.json { render :show, status: :created, location: @section }
       else
@@ -38,6 +38,6 @@ class SectionsController < ApplicationController
   protected
 
     def section_params
-      params.require(:section).permit(:title, :image, :item_id, :description)
+      params.require(:section).permit(:title, :image, :item_id, :description, :order)
     end
 end

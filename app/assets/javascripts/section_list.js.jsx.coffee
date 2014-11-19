@@ -33,6 +33,7 @@ Sections = React.createClass(
       title: item.title
       image: item.links.tiled_image.uri
       item_id: item.id
+      order: index
     }
     console.log(@state.sections)
     sections = @state.sections
@@ -205,6 +206,8 @@ SectionList = React.createClass(
       rows.push (Section {section: section, key: section.id, onSectionClick: @props.onSectionClick })
       rows.push (SectionSpacer {key: "spacer-#{section.id}", currentDragItem: @props.currentDragItem, onDrop: @props.onDrop, new_index: (i + 1) } )
       i++
+    if rows.length == 0
+      rows.push (SectionSpacer {key: "spacer-0", currentDragItem: @props.currentDragItem, onDrop: @props.onDrop, new_index: 0 } )
     rows
 
   render: ->

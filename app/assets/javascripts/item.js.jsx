@@ -10,12 +10,9 @@ var Item = React.createClass({
   render: function() {
     //var rawMarkup = converter.makeHtml(this.props.children.toString());
     return (
-      <li>
-        <a href="#" onClick={this.handleClick}>
-          {this.props.item.title}
-          <img src={this.props.item.links.tiled_image.uri } width="100" />
-        </a>
-      </li>
+      <div>
+        <img src={this.props.item.links.tiled_image.uri } width="100" />
+      </div>
     );
   }
 });
@@ -25,13 +22,13 @@ var ItemList = React.createClass({
     var onClickFunction = this.props.onItemClick
     var itemNodes = this.props.data.map(function(item, index) {
       return (
-        <Item item={item} key={item.id} onItemClick={onClickFunction} />
+          <Item item={item} key={item.id} onItemClick={onClickFunction} />
       );
     });
     return (
-      <ul>
+      <div>
         {itemNodes}
-      </ul>
+      </div>
     );
   }
 });
