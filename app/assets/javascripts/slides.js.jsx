@@ -1,5 +1,8 @@
 
 var SlideForm = React.createClass({
+  success: function () {
+    React.render(<Sections />, $('#slide_form').get(0))
+  },
   handleSectionSubmit: function(section) {
 
     this.setState({data: section}, function() {
@@ -12,7 +15,7 @@ var SlideForm = React.createClass({
         type: 'POST',
         data: { section: section },
         success: function(data) {
-          this.setState({data: data});
+          this.success();
         }.bind(this),
         error: function(xhr, status, err) {
           console.error(this.props.url, status, err.toString());
@@ -25,6 +28,7 @@ var SlideForm = React.createClass({
   },
   handleSubmit: function(e) {
     e.preventDefault();
+
     var title = this.refs.title.getDOMNode().value.trim();
     var description = this.refs.description.getDOMNode().value.trim();
     var image = this.refs.image.getDOMNode().value.trim();
@@ -41,6 +45,8 @@ var SlideForm = React.createClass({
   },
   render: function() {
     return (
+      <div>
+      <h1>New Section</h1>
       <form className="slideForm" onSubmit={this.handleSubmit}>
         <div className="form-group">
           <label className="control-label" forName="titleInput">Title</label>
@@ -63,6 +69,7 @@ var SlideForm = React.createClass({
           <button className="btn btn-primary">Save</button>
         </div>
       </form>
+      </div>
     );
   }
 });
@@ -74,13 +81,13 @@ var SectionList = React.createClass({
     for (var i=0; i < this.props.data.length; i++) {
       section = this.props.data[i]
       rows.push(<Section section={section} key={section.id} onSectionClick={onClickFunction} />);
-      rows.push(<li className="new_panel"></li>)
+      rows.push(<SectionSpacer />);
     }
 
     return (
-      <ul>
+      <div>
         {rows}
-      </ul>
+      </div>
     );
   }
 });
@@ -94,15 +101,23 @@ var Section = React.createClass({
   render: function() {
     //var rawMarkup = converter.makeHtml(this.props.children.toString());
     return (
-      <li>
+      <div className="section_display">
         <a href="#" onClick={this.handleClick}>
           <img src={this.props.section.image } width="300" />
         </a>
-      </li>
+      </div>
     );
   }
 });
 
+var SectionSpacer = React.createClass({
+
+  render: function() {
+    return (
+      <div className="section_spacer"></div>
+    )
+  }
+});
 
 var Sections = React.createClass({
   loadSectionsFromServer: function() {
@@ -135,7 +150,6 @@ var Sections = React.createClass({
       </div>
     );
   }
-
 });
 
 
