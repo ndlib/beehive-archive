@@ -11,13 +11,14 @@ document.addEventListener 'DOMContentLoaded', ->
 Sections = React.createClass(
   getInitialState: ->
     currentDragItem: null
+    sections: []
 
   loadSectionsFromServer: ->
     $.ajax
       url: "sections.json"
       dataType: "json"
       success: ((data) ->
-        @setState data: data.sections
+        @setState sections: data.sections
         return
       ).bind(this)
       error: ((xhr, status, err) ->
@@ -27,21 +28,49 @@ Sections = React.createClass(
 
     return
 
-  getInitialState: ->
-    data: []
+  handleItemDrop: (item, index) ->
+    section = {
+      title: item.title
+      image: item.links.tiled_image.uri
+      item_id: item.id
+    }
+    console.log(@state.sections)
+    sections = @state.sections
+    sections.splice(index, 0, section)
+    console.log(sections)
+    @setState
+      sections: sections
+    , ->
+
+      $.ajax
+        url: "sections.json"
+        dataType: "json"
+        type: "POST"
+        data:
+          section: section
+
+        success: ((data) ->
+          console.log("success")
+          return
+        ).bind(this)
+        error: ((xhr, status, err) ->
+          console.error @props.url, status, err.toString()
+          return
+        ).bind(this)
+
+      return
 
   onDragStart: (details) ->
-    console.log(details)
     @setState currentDragItem: details
 
   onDragStop: ->
     @setState currentDragItem: null
 
-  onDrop: (target) ->
+  onDrop: (target, index) ->
+    @handleItemDrop(target, index)
     @setState lastDrop:
       source: @state.currentDragItem
       target: target
-    window.location.replace("/sections/new")
 
   componentDidMount: ->
     @loadSectionsFromServer()
@@ -52,12 +81,12 @@ Sections = React.createClass(
     return
 
   render: ->
-    (div { className: 'sections row'}, [
+    (div { className: 'sections'}, [
       (h2 {key: "title"}, "Sections"),
-      (div { className: 'col-md-9'}, (
-        SectionList { key: 'list', data: @state.data, onSectionClick: @sectionClick, currentDragItem: @state.currentDragItem, onDrop: @onDrop})
+      (div { key: 'list-div', className: "sections-content"}, (
+        SectionList { key: 'list', data: @state.sections, onSectionClick: @sectionClick, currentDragItem: @state.currentDragItem, onDrop: @onDrop})
       ),
-      (div { className: 'col-md-3'},
+      (div { key: 'add-item-div', className: "add-items-content"},
         (AddItemBox {key: 'add-item', onDragStart: @onDragStart, onDragStop: @onDragStop})
       )
     ])
@@ -66,8 +95,6 @@ Sections = React.createClass(
 
 AddItemBox = React.createClass(
   getInitialState: ->
-    mouseDown: false
-    dragging: false
     items: []
 
   loadItemsFromServer: ->
@@ -89,6 +116,16 @@ AddItemBox = React.createClass(
     @loadItemsFromServer()
     setInterval @loadItemsFromServer(), 8000
     return
+
+  render: ->
+    (ItemList { onDragStart: @props.onDragStart, onDragStop: @props.onDragStop, items: @state.items } )
+
+)
+
+Item = React.createClass(
+  getInitialState: ->
+    mouseDown: false
+    dragging: false
 
   style: ->
     if @state.dragging
@@ -117,12 +154,12 @@ AddItemBox = React.createClass(
 
     if !@state.dragging and distance > DRAG_THRESHOLD
       @setState dragging: true
-      @props.onDragStart("item")
+      @props.onDragStart(@props.item)
 
     if @state.dragging
       @setState
-        left: deltaX + document.body.scrollLeft
-        top: deltaY + document.body.scrollTop
+        left: @state.elementX + deltaX + document.body.scrollLeft
+        top: @state.elementY + deltaY + document.body.scrollTop
 
   onMouseUp: ->
     @removeEvents()
@@ -139,24 +176,24 @@ AddItemBox = React.createClass(
     document.removeEventListener 'mouseup', @onMouseUp
 
   render: ->
-    console.log("drag #{'dragging' if @state.dragging}")
-    (div { className: "drag #{'dragging' if @state.dragging}", onMouseDown: @onMouseDown, style: @style() }, "Add Item")
-
-)
-
-Item = React.createClass(
-  render: ->
-    (div {}, (img { src: @props.item.links.tiled_image.uri width: "100" }))
+    (div { src: @props.item.links.tiled_image.uri, className: "drag #{'dragging' if @state.dragging}", onMouseDown: @onMouseDown, style: @style() }, @props.item.title)
 )
 
 ItemList = React.createClass(
   render: ->
-    onClickFunction = @props.onItemClick
-    itemNodes = @props.data.map((item, index) ->
-      Item { item: item, key: item.id, onItemClick: onClickFunction }
-      return
+    onDragStart = @props.onDragStart
+    onDragStop = @props.onDragStop
+    itemNodes = @props.items.map((item, index) ->
+      Item { item: item, key: item.id, onDragStart: onDragStart, onDragStop: onDragStop }
     )
-    return
+
+    (div { className: 'add-items-content-inner'}, [
+      (div { className: 'add-items-title', key: 'add-items-title' }, [
+        (h2 {key: 'add-items-title-h2'}, "Add Items")
+        (p {key: 'add-items-title-p'}, "Click to Drag items into the exhibit")
+      ])
+      itemNodes
+    ])
 )
 
 SectionList = React.createClass(
@@ -166,12 +203,12 @@ SectionList = React.createClass(
     while i < @props.data.length
       section = @props.data[i]
       rows.push (Section {section: section, key: section.id, onSectionClick: @props.onSectionClick })
-      rows.push (SectionSpacer {key: "spacer-#{section.id}", currentDragItem: @props.currentDragItem, onDrop: @props.onDrop } )
+      rows.push (SectionSpacer {key: "spacer-#{section.id}", currentDragItem: @props.currentDragItem, onDrop: @props.onDrop, new_index: (i + 1) } )
       i++
     rows
 
   render: ->
-    (div {}, @sectionRows())
+    (div { className: "sections-content-inner"}, @sectionRows())
 )
 
 
@@ -212,7 +249,7 @@ SectionSpacer = React.createClass(
 
   onDrop: ->
     if @active()
-      @props.onDrop(@props.currentDragItem)
+      @props.onDrop(@props.currentDragItem, @props.new_index)
 
   render: ->
     (div {className: @classes(), onMouseEnter: @onMouseEnter, onMouseLeave: @onMouseLeave, onMouseUp: @onDrop  },

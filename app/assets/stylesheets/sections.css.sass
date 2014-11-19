@@ -1,15 +1,47 @@
 .sections
   user-select: none
 
+.sections-content
+  width: 700px
+  height: 500px
+  border: 13px solid #bed5cd
+  overflow: scroll
+
+.sections-content-inner
+  width: 100000px
+
+.sections-content-inner div
+  float: left
+  display: inline
+
 .section_spacer
   border: dashed
-  height: 40px
-  width: 300px
+  height: 360px
+  width: 40px
+  margin: 25px
+
+
+.add-items-content
+  width: 700px
+  height: 120px
+  border: 1px solid blue
+  overflow: scroll
+
+.add-items-content-inner
+  width: 100000px
+
+.add-items-content-inner div
+  float: left
+  display: inline
+
+.add-items-content img
+  height: 100px
+  margin: 5px
 
 
 .section_spacer.active
   &.hover
-    height: 80px
+    width: 80px
     background-color: green
 
 
@@ -24,8 +56,6 @@
 
 .drag
   border: solid
-  width: 240px
-  line-height: 38px
   border-radius: 10px
   font-weight: bold
   font-size: 24px

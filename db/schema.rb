@@ -11,13 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141114191722) do
+ActiveRecord::Schema.define(version: 20141119173212) do
 
   create_table "sections", force: true do |t|
     t.string  "title"
     t.text    "description"
     t.string  "image"
     t.integer "item_id"
+    t.integer "order"
   end
 
 end

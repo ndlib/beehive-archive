@@ -115,12 +115,6 @@ Draggable = React.createClass
       @setState dragging: true
       @props.onDragStart? @props.dragData?()
 
-    console.log("-----------")
-    console.log(@state.elementX)
-    console.log(deltaX)
-    console.log(document.body.scrollLeft)
-    console.log(@state.elementX + deltaX + document.body.scrollLeft)
-
     if @state.dragging
       @setState
         left: @state.elementX + deltaX + document.body.scrollLeft
