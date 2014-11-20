@@ -14,30 +14,39 @@
   float: left
   display: inline
 
+.section
+  padding: 20px
 
 .section img
   width: 300px
+  float: left
+
+.section .delete
+  background: gray
+  border-radius: 10px
+  left: -30px
 
 .section .edit
   clear: both
   background: gray
   width: 100%
   display: none
-  padding: 20px
+  padding: 8px
   text-align: center
 
 .section:hover .edit
   cursor: pointer
   display: block
 
-.section img
-  float: left
+.section:hover .delete
+  cursor: pointer
+  display: block
 
 .section-description
   float: left
   height: 400px
   width: 300px
-  margin-left: 5px
+  margin-left: 20px
   overflow: scroll
 
 .section_spacer
