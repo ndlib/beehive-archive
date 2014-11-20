@@ -2,7 +2,7 @@
   user-select: none
 
 .sections-content
-  width: 700px
+  width: 100%
   height: 500px
   border: 13px solid #bed5cd
   overflow: scroll
@@ -14,6 +14,32 @@
   float: left
   display: inline
 
+
+.section img
+  width: 300px
+
+.section .edit
+  clear: both
+  background: gray
+  width: 100%
+  display: none
+  padding: 20px
+  text-align: center
+
+.section:hover .edit
+  cursor: pointer
+  display: block
+
+.section img
+  float: left
+
+.section-description
+  float: left
+  height: 400px
+  width: 300px
+  margin-left: 5px
+  overflow: scroll
+
 .section_spacer
   border: dashed
   height: 360px
@@ -22,7 +48,7 @@
 
 
 .add-items-content
-  width: 700px
+  width: 100%
   height: 120px
   border: 1px solid blue
   overflow: scroll
@@ -51,8 +77,6 @@
 .section_spacer.active div
   display: block
 
-.section img
-  width: 300px
 
 .drag
   border: solid

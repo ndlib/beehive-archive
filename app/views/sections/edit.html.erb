@@ -1,0 +1,16 @@
+<%= simple_form_for @section do | f | %>
+
+  <%= f.input :title %>
+
+  <div class="row">
+    <div class="col-md-6">
+      <img src="<%= f.object.image %>" width="100%" />
+    </div>
+    <div class="col-md-6">
+      <%= f.input :description, as: :text %>
+    </div>
+  </div>
+  <div class="form-group">
+    <button class="btn btn-primary">Save</button>
+  </div>
+<% end %>

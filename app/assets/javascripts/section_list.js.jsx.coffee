@@ -1,3 +1,5 @@
+converter = new Showdown.converter()
+
 {div, p, h2, a, img} = React.DOM
 
 LEFT_BUTTON = 0
@@ -78,7 +80,8 @@ Sections = React.createClass(
     setInterval @loadSectionsFromServer(), 8000
     return
 
-  sectionClick: ->
+  sectionClick: (section) ->
+    window.location.replace("/sections/#{section.id}/edit")
     return
 
   render: ->
@@ -222,13 +225,18 @@ Section = React.createClass(
     return
 
   render: ->
+    if @props.section.description
+      rawMarkup = converter.makeHtml(@props.section.description.toString())
+    else
+      rawMarkup = false
+
     (div {className: "section"}, [
-      (a { key: "a-#{@props.section.id}", onClick: @handleClick }, [
-        (img { key: "img-#{@props.section.id}", src: @props.section.image } )
-      ])
+      (img { key: "img-#{@props.section.id}", src: @props.section.image } )
+      if rawMarkup
+        (div {key: "desc-#{@props.section.id}", className: 'section-description', dangerouslySetInnerHTML: {__html: rawMarkup}  })
+      (div { key: "edit-#{@props.section.id}",  onClick: @handleClick, className: 'edit'}, "Edit")
     ])
 )
-
 
 SectionSpacer = React.createClass(
   getInitialState: ->

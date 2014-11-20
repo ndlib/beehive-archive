@@ -4,11 +4,9 @@ class SectionsController < ApplicationController
     @sections = SectionQuery.new.all_in_exhibit
   end
 
-
   def show
-
+    @section = Section.find(params[:id])
   end
-
 
   def create
     @section = Section.new
@@ -24,16 +22,27 @@ class SectionsController < ApplicationController
     end
   end
 
-
-  def update
-
+  def edit
+    @section = Section.find(params[:id])
   end
 
+  def update
+    @section = Section.find(params[:id])
+
+    respond_to do |format|
+      if SaveSection.call(@section, section_params)
+        format.html { redirect_to sections_path, notice: 'Comment was successfully updated.' }
+        format.json { render :show, status: :updated, location: @section }
+      else
+        format.html { render :new }
+        format.json { render json: @section.errors, status: :unprocessable_entity }
+      end
+    end
+  end
 
   def destroy
 
   end
-
 
   protected
 
