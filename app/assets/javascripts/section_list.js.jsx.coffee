@@ -37,10 +37,10 @@ Sections = React.createClass(
       item_id: item.id
       order: index
     }
-    console.log(@state.sections)
+
     sections = @state.sections
     sections.splice(index, 0, section)
-    console.log(sections)
+    #optimistically add the data to the list of sections
     @setState
       sections: sections
     , ->
@@ -53,7 +53,8 @@ Sections = React.createClass(
           section: section
 
         success: ((data) ->
-          console.log("success")
+          # this is called because the optimist listing above does not include the id of the item.
+          @loadSectionsFromServer()
           return
         ).bind(this)
         error: ((xhr, status, err) ->
