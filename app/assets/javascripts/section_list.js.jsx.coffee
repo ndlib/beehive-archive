@@ -1,6 +1,6 @@
 converter = new Showdown.converter()
 
-{div, p, h2, a, img} = React.DOM
+{div, p, h1, h2, a, img} = React.DOM
 
 LEFT_BUTTON = 0
 DRAG_THRESHOLD = 3 # pixels
@@ -86,8 +86,8 @@ Sections = React.createClass(
     return
 
   render: ->
-    (div { className: 'sections'}, [
-      (h2 {key: "title"}, "Sections"),
+    (div { className: "sections #{'dragging' if @state.currentDragItem}"}, [
+      (h1 {key: "title"}, "Sections"),
       (div { key: 'list-div', className: "sections-content"}, (
         SectionList { key: 'list', data: @state.sections, onSectionClick: @sectionClick, currentDragItem: @state.currentDragItem, onDrop: @onDrop})
       ),
@@ -237,6 +237,9 @@ Section = React.createClass(
       (img { key: "img-#{@props.section.id}", src: @props.section.image } )
       if rawMarkup
         (div {key: "desc-#{@props.section.id}", className: 'section-description', dangerouslySetInnerHTML: {__html: rawMarkup}  })
+      (div {},
+        (div { key: "delete-#{@props.section.id}",  onClick: @handleClick, className: 'delete'}, "X")
+      )
       (div { key: "edit-#{@props.section.id}",  onClick: @handleClick, className: 'edit'}, "Edit")
     ])
 )
