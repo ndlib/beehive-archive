@@ -143,6 +143,7 @@ Item = React.createClass(
   onMouseDown: (event) ->
     if event.button == LEFT_BUTTON
       event.stopPropagation()
+      event.preventDefault()
       @addEvents()
       pageOffset = @getDOMNode().getBoundingClientRect()
       @setState
@@ -181,7 +182,8 @@ Item = React.createClass(
     document.removeEventListener 'mouseup', @onMouseUp
 
   render: ->
-    (div { src: @props.item.links.tiled_image.uri, className: "drag #{'dragging' if @state.dragging}", onMouseDown: @onMouseDown, style: @style() }, @props.item.title)
+    (div {className: "drag #{'dragging' if @state.dragging}", onMouseDown: @onMouseDown, style: @style()}, (img { src: @props.item.links.tiled_image.uri })
+    )
 )
 
 ItemList = React.createClass(
