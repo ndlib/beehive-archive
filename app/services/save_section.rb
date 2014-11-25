@@ -29,13 +29,6 @@ class SaveSection
     end
 
     def fix_order!
-      res = current_order.to_a.insert(section.order, section)
-      puts res.inspect
-      res.each_with_index do |s, index|
-        if s.order != index
-          s.order=index
-          s.save!
-        end
-      end
+      ReorderSections.call(current_order, section)
     end
 end
