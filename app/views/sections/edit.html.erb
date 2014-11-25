@@ -2,13 +2,15 @@
 
 <%= simple_form_for @section do | f | %>
 
-  <%= f.input :title %>
-
   <div class="row">
     <div class="col-md-6">
-      <img src="<%= f.object.image %>" width="100%" />
+      <%= react_component('ImageCaptionEditor', image: f.object.image, fieldName: "section[caption]", caption: "caption!!") %>
     </div>
     <div class="col-md-6">
+      <%= f.input :title %>
+
+      <p><%= link_to "Add Intro" %> </p>
+
       <%= f.input :description, as: :text %>
     </div>
   </div>
