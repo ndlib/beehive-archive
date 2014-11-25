@@ -2,7 +2,7 @@
 
 var ImageCaptionEditor = React.createClass({
   getInitialState: function() {
-    return {showForm: false};
+    return {showForm: this.props.caption ? true : false };
   },
   handleClick: function() {
     this.setState({ showForm: !this.state.showForm });
