@@ -7,7 +7,6 @@ describe SaveSection do
   let(:params) { { title: 'title', item_id: 1, order: 1, image: 'image', order: 1 } }
 
 
-
   context "successful save" do
     before(:each) do
       expect(ReorderSections).to receive(:call).and_return(true)

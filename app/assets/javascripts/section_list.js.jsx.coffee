@@ -233,10 +233,12 @@ Section = React.createClass(
     else
       rawMarkup = false
 
+    title = @props.section.title
+    caption = @props.section.caption
+
     (div {className: "section"}, [
-      (img { key: "img-#{@props.section.id}", src: @props.section.image } )
-      if rawMarkup
-        (div {key: "desc-#{@props.section.id}", className: 'section-description', dangerouslySetInnerHTML: {__html: rawMarkup}  })
+      (SectionImage {section: @props.section} )
+      (SectionDescription {section: @props.section })
       (div {},
         (div { key: "delete-#{@props.section.id}",  onClick: @handleClick, className: 'delete'}, "X")
       )
