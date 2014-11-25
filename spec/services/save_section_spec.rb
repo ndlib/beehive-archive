@@ -24,6 +24,7 @@ describe SaveSection do
     end
   end
 
+
   context "unsuccessful save" do
     before(:each) do
       expect(section).to receive(:save).and_return(false)

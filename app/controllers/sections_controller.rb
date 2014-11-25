@@ -47,6 +47,6 @@ class SectionsController < ApplicationController
   protected
 
     def section_params
-      params.require(:section).permit(:title, :image, :item_id, :description, :order)
+      params.require(:section).permit(:title, :image, :item_id, :description, :order, :caption)
     end
 end
