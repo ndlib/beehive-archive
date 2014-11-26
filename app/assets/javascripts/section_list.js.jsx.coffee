@@ -1,16 +1,9 @@
-converter = new Showdown.converter()
-
 {div, p, h1, h2, a, img} = React.DOM
 
 LEFT_BUTTON = 0
 DRAG_THRESHOLD = 3 # pixels
 
-document.addEventListener 'DOMContentLoaded', ->
-  if document.getElementById('section_list')
-    React.render Sections(), document.getElementById('section_list')
-
-
-Sections = React.createClass(
+window.Sections = React.createClass(
   getInitialState: ->
     currentDragItem: null
     sections: []
@@ -86,15 +79,19 @@ Sections = React.createClass(
     return
 
   render: ->
-    (div { className: "sections #{'dragging' if @state.currentDragItem}"}, [
-      (h1 {key: "title"}, "Sections"),
-      (div { key: 'list-div', className: "sections-content"}, (
-        SectionList { key: 'list', data: @state.sections, onSectionClick: @sectionClick, currentDragItem: @state.currentDragItem, onDrop: @onDrop})
-      ),
-      (div { key: 'add-item-div', className: "add-items-content"},
-        (AddItemBox {key: 'add-item', onDragStart: @onDragStart, onDragStop: @onDragStop})
-      )
-    ])
+    divclassname = "sections"
+    if @state.currentDragItem
+      divclassname = "sections #{dragging}"
+
+    `<div className={this.divclassname}>
+      <h1>Sections</h1>
+      <div className="sections-content">
+        <SectionList sections={this.state.sections} onSectionClick={this.sectionClick} currentDragItem={this.state.currentDragItem} onDrop={this.onDrop} />
+      </div>
+      <div className="add-items-content">
+        <AddItemBox onDragStart={this.onDragStart} onDragStop={this.onDragStop} />
+      </div>
+    </div>`
 )
 
 
@@ -123,8 +120,7 @@ AddItemBox = React.createClass(
     return
 
   render: ->
-    (ItemList { onDragStart: @props.onDragStart, onDragStop: @props.onDragStop, items: @state.items } )
-
+    `<ItemList onDragStart={this.props.onDragStart} onDragStop={this.props.onDragStop} items={this.state.items} />`
 )
 
 Item = React.createClass(
@@ -182,8 +178,13 @@ Item = React.createClass(
     document.removeEventListener 'mouseup', @onMouseUp
 
   render: ->
-    (div {className: "drag #{'dragging' if @state.dragging}", onMouseDown: @onMouseDown, style: @style()}, (img { src: @props.item.links.tiled_image.uri })
-    )
+    dragclass = "drag "
+    if @state.dragging
+      dragclass = "#{dragclass} dragging"
+
+    `<div className={dragclass} onMouseDown={this.onMouseDown} style={this.style()}>
+      <img src={this.props.item.links.tiled_image.uri} />
+    </div>`
 )
 
 ItemList = React.createClass(
@@ -194,21 +195,21 @@ ItemList = React.createClass(
       Item { item: item, key: item.id, onDragStart: onDragStart, onDragStop: onDragStop }
     )
 
-    (div { className: 'add-items-content-inner'}, [
-      (div { className: 'add-items-title', key: 'add-items-title' }, [
-        (h2 {key: 'add-items-title-h2'}, "Add Items")
-        (p {key: 'add-items-title-p'}, "Click to Drag items into the exhibit")
-      ])
-      itemNodes
-    ])
+    `<div className="add-items-content-inner">
+      <div className="add-items-title">
+        <h2>Add Items</h2>
+        <p>Click to Drag items into the exhibit</p>
+      </div>
+      {itemNodes}
+    </div>`
 )
 
 SectionList = React.createClass(
   sectionRows: ->
     rows = []
     i = 0
-    while i < @props.data.length
-      section = @props.data[i]
+    while i < @props.sections.length
+      section = @props.sections[i]
       rows.push (Section {section: section, key: section.id, onSectionClick: @props.onSectionClick })
       rows.push (SectionSpacer {key: "spacer-#{section.id}", currentDragItem: @props.currentDragItem, onDrop: @props.onDrop, new_index: (i + 1) } )
       i++
@@ -217,7 +218,7 @@ SectionList = React.createClass(
     rows
 
   render: ->
-    (div { className: "sections-content-inner"}, @sectionRows())
+    `<div className="sections-content-inner">{this.sectionRows()}</div>`
 )
 
 
@@ -228,22 +229,11 @@ Section = React.createClass(
     return
 
   render: ->
-    if @props.section.description
-      rawMarkup = converter.makeHtml(@props.section.description.toString())
-    else
-      rawMarkup = false
-
-    title = @props.section.title
-    caption = @props.section.caption
-
-    (div {className: "section"}, [
-      (SectionImage {section: @props.section} )
-      (SectionDescription {section: @props.section })
-      (div {},
-        (div { key: "delete-#{@props.section.id}",  onClick: @handleClick, className: 'delete'}, "X")
-      )
-      (div { key: "edit-#{@props.section.id}",  onClick: @handleClick, className: 'edit'}, "Edit")
-    ])
+    `<div className="section">
+      <SectionImage section={this.props.section} />
+      <SectionDescription section={this.props.section} />
+      <div className="edit" onClick={this.handleClick}>Edit</div>
+    </div>`
 )
 
 SectionSpacer = React.createClass(
@@ -271,8 +261,7 @@ SectionSpacer = React.createClass(
       @props.onDrop(@props.currentDragItem, @props.new_index)
 
   render: ->
-    (div {className: @classes(), onMouseEnter: @onMouseEnter, onMouseLeave: @onMouseLeave, onMouseUp: @onDrop  },
-      (div {}, "Create New Section HERE!!")
-
-    )
+    `<div className={this.classes()} onMouseEnter={this.onMouseEnter} onMouseLeave={this.onMouseLeave} onMouseUp={this.onDrop}>
+        <div>Create New Section HERE!!</div>
+     </div>`
 )
