@@ -30,9 +30,9 @@
           </div>
           <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-              <li><a href="http://localhost:3017/collections">Collections</a></li>
-              <li><a href="http://localhost:3018/sections">Showcases</a></li>
-              <li><a href="http://localhost:3017/admin/users">Users</a></li>
+              <li><a href="<%= Rails.configuration.honeycomb_url %>/collections">Collections</a></li>
+              <li><a href="<%= sections_path %>">Showcases</a></li>
+              <li><a href="<%= Rails.configuration.honeycomb_url %>/admin/users">Users</a></li>
             </ul>
           </div>
         </div>

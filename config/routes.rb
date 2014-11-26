@@ -2,6 +2,11 @@ Rails.application.routes.draw do
   root 'application#index'
 
   resources :sections
+  resources :exhibits do
+    member do
+      get :items, defaults: {format: :json}
+    end
+  end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

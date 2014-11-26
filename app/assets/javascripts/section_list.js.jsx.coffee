@@ -4,13 +4,18 @@ LEFT_BUTTON = 0
 DRAG_THRESHOLD = 3 # pixels
 
 window.Sections = React.createClass(
+  propTypes:
+    sectionsJSONPath: React.PropTypes.string.isRequired
+    sectionsPath: React.PropTypes.string.isRequired
+    itemsJSONPath: React.PropTypes.string.isRequired
+
   getInitialState: ->
     currentDragItem: null
     sections: []
 
   loadSectionsFromServer: ->
     $.ajax
-      url: "sections.json"
+      url: @props.sectionsJSONPath
       dataType: "json"
       success: ((data) ->
         @setState sections: data.sections
@@ -24,9 +29,11 @@ window.Sections = React.createClass(
     return
 
   handleItemDrop: (item, index) ->
+    tiled_image = item.links.tiled_image
+    image = "http://#{tiled_image.host}/iipsrv?FIF=#{encodeURIComponent(tiled_image.path + ".tif")}&CVT=jpeg"
     section = {
       title: item.title
-      image: item.links.tiled_image.uri
+      image: image
       item_id: item.id
       order: index
     }
@@ -39,7 +46,7 @@ window.Sections = React.createClass(
     , ->
 
       $.ajax
-        url: "sections.json"
+        url: @props.sectionsJSONPath
         dataType: "json"
         type: "POST"
         data:
@@ -75,13 +82,13 @@ window.Sections = React.createClass(
     return
 
   sectionClick: (section) ->
-    window.location.replace("/sections/#{section.id}/edit")
+    window.location = "#{@props.sectionsPath}/#{section.id}/edit"
     return
 
   render: ->
     divclassname = "sections"
     if @state.currentDragItem
-      divclassname = "sections #{dragging}"
+      divclassname = "sections dragging"
 
     `<div className={this.divclassname}>
       <h1>Sections</h1>
@@ -89,19 +96,22 @@ window.Sections = React.createClass(
         <SectionList sections={this.state.sections} onSectionClick={this.sectionClick} currentDragItem={this.state.currentDragItem} onDrop={this.onDrop} />
       </div>
       <div className="add-items-content">
-        <AddItemBox onDragStart={this.onDragStart} onDragStop={this.onDragStop} />
+        <AddItemBox onDragStart={this.onDragStart} onDragStop={this.onDragStop} itemsJSONPath={this.props.itemsJSONPath} />
       </div>
     </div>`
 )
 
 
 AddItemBox = React.createClass(
+  propTypes:
+    itemsJSONPath: React.PropTypes.string.isRequired
+
   getInitialState: ->
     items: []
 
   loadItemsFromServer: ->
     $.ajax
-      url: "http://localhost:3017/collections/1/items.json?include=tiled_images"
+      url: @props.itemsJSONPath
       dataType: "json"
       success: ((data) ->
         @setState items: data.items
@@ -181,9 +191,11 @@ Item = React.createClass(
     dragclass = "drag "
     if @state.dragging
       dragclass = "#{dragclass} dragging"
+    tiled_image = @props.item.links.tiled_image
+    image = "http://#{tiled_image.host}/iipsrv?FIF=#{encodeURIComponent(tiled_image.path + ".tif")}&HEI=100&CVT=jpeg"
 
     `<div className={dragclass} onMouseDown={this.onMouseDown} style={this.style()}>
-      <img src={this.props.item.links.tiled_image.uri} />
+      <img src={image} />
     </div>`
 )
 

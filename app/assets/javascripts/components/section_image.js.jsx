@@ -1,5 +1,3 @@
-var converter = new Showdown.converter()
-
 var SectionImage = React.createClass({
   propTypes: {
     section: React.PropTypes.object.isRequired
@@ -28,7 +26,7 @@ var SectionDescription = React.createClass({
   render: function () {
     var rawMarkup = false;
     if (this.props.section.description) {
-      rawMarkup = converter.makeHtml(this.props.section.description.toString())
+      rawMarkup = this.props.section.description.toString();
     }
 
     if (rawMarkup) {

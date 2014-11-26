@@ -82,5 +82,5 @@ Rails.application.configure do
 
   config.react.variant = :production
 
-  config.honeycomb_url = "https://honeycombprod-vm.library.nd.edu"
+  config.honeycomb_url = "https://honeycombpprd-vm.library.nd.edu"
 end

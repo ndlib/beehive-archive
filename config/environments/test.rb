@@ -38,4 +38,6 @@ Rails.application.configure do
   # config.action_view.raise_on_missing_translations = true
 
   config.react.variant = :development
+
+  config.honeycomb_url = "http://localhost:3017"
 end
