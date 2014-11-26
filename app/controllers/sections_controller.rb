@@ -34,7 +34,7 @@ class SectionsController < ApplicationController
         format.html { redirect_to sections_path, notice: 'Comment was successfully updated.' }
         format.json { render :show, status: :updated, location: @section }
       else
-        format.html { render :new }
+        format.html { render :edit }
         format.json { render json: @section.errors, status: :unprocessable_entity }
       end
     end
