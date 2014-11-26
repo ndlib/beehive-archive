@@ -4,7 +4,7 @@
 
   <div class="row">
     <div class="col-md-6">
-      <%= react_component('ImageCaptionEditor', image: f.object.image, fieldName: "section[caption]", caption: f.object.caption) %>
+      <%= react_component('ImageCaptionEditor', {image: f.object.image, fieldName: "section[caption]", caption: f.object.caption}, {prerender: true}) %>
     </div>
     <div class="col-md-6">
       <%= f.input :title %>
