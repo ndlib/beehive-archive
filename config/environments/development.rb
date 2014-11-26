@@ -37,4 +37,5 @@ Rails.application.configure do
 
   config.react.variant = :development
 
+  config.honeycomb_url = "http://localhost:3017"
 end

@@ -1,4 +1,5 @@
 class SectionsController < ApplicationController
+  before_action :set_exhibit
 
   def index
     @sections = SectionQuery.new.all_in_exhibit
@@ -48,5 +49,9 @@ class SectionsController < ApplicationController
 
     def section_params
       params.require(:section).permit(:title, :image, :item_id, :description, :order, :caption)
+    end
+
+    def set_exhibit
+      @exhibit = Exhibit.find(1)
     end
 end

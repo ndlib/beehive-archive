@@ -1,1 +1,1 @@
-<%= react_component 'Sections', {prerender: true} %>
+<%= react_component 'Sections', {prerender: true, itemsJSONPath: items_exhibit_path(@exhibit.id, :json), sectionsPath: sections_path, sectionsJSONPath: sections_path(:json)} %>
