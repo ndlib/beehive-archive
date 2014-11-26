@@ -9,7 +9,7 @@ RSpec.describe Section do
     end
   end
 
-  [:title, :item_id, :image].each do | field |
+  [:item_id, :image].each do | field |
     it "requires the field, #{field}" do
       expect(subject).to have(1).error_on(field)
     end
