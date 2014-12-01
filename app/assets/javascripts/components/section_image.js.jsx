@@ -1,3 +1,4 @@
+//= require showdown
 var converter = new Showdown.converter()
 
 var SectionList = React.createClass({
