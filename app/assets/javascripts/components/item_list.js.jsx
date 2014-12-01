@@ -2,16 +2,12 @@ var ItemList;
 
 ItemList = React.createClass({
   render: function() {
-    var itemNodes, onDragStart, onDragStop;
+    var itemNodes, onDragStart, onDragStop, key;
     onDragStart = this.props.onDragStart;
     onDragStop = this.props.onDragStop;
     itemNodes = this.props.items.map(function(item, index) {
-      return Item({
-        item: item,
-        key: item.id,
-        onDragStart: onDragStart,
-        onDragStop: onDragStop
-      });
+      key = "item-" + item.id
+      return <Item  item={item} key={key} onDragStart={onDragStart} onDragStop={onDragStop} />
     });
     return (
       <div className="add-items-content-inner">
