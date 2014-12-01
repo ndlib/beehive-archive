@@ -89,9 +89,6 @@ var SectionSpacer = React.createClass({
 
 
 
-
-
->>>>>>> FETCH_HEAD
 var SectionImage = React.createClass({
   propTypes: {
     section: React.PropTypes.object.isRequired
