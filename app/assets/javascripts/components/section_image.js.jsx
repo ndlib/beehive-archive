@@ -9,7 +9,7 @@ var SectionList = React.createClass({
     while (i < this.props.sections.length) {
       section = this.props.sections[i];
       rows.push(this.section_tag(section));
-      rows.push(this.spacer_tag(section.id))
+      rows.push(this.spacer_tag(section.order))
       i++;
     }
     if (rows.length === 0) {
@@ -18,7 +18,8 @@ var SectionList = React.createClass({
     return rows;
   },
   section_tag: function(section) {
-    return (<Section section={section} key={section.id} onSectionClick={this.props.onSectionClick} />)
+    var key = section.id + '-' + section.order
+    return (<Section section={section} key={key} onSectionClick={this.props.onSectionClick} />)
   },
   spacer_tag: function(order) {
     var  key = "spacer-" + order;

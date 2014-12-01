@@ -5,5 +5,6 @@ json.set! :sections do
     json.description section.description
     json.image section.image
     json.caption section.caption
+    json.order section.order
   end
 end

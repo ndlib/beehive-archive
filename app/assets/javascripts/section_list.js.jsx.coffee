@@ -30,8 +30,14 @@ window.Sections = React.createClass(
 
   handleItemDrop: (item, index) ->
     tiled_image = item.links.tiled_image
-    image = "http://#{tiled_image.host}/iipsrv?FIF=#{encodeURIComponent(tiled_image.path + ".tif")}&CVT=jpeg"
+    split_path = tiled_image.path.split('/')
+    filename = split_path.pop()
+    id = split_path.pop()
+
+    image =  "http://localhost:3017/system/items/images/000/000/" + id + "/original/" + filename
+
     section = {
+      id: 'new'
       title: item.title
       image: image
       item_id: item.id
@@ -44,7 +50,6 @@ window.Sections = React.createClass(
     @setState
       sections: sections
     , ->
-
       $.ajax
         url: @props.sectionsJSONPath
         dataType: "json"
@@ -193,9 +198,8 @@ Item = React.createClass(
       dragclass = "#{dragclass} dragging"
     tiled_image = @props.item.links.tiled_image
     image = "http://#{tiled_image.host}/iipsrv?FIF=#{encodeURIComponent(tiled_image.path + ".tif")}&HEI=100&CVT=jpeg"
-
     `<div className={dragclass} onMouseDown={this.onMouseDown} style={this.style()}>
-      <img src={image} />
+      <TiledImage tiled_image={tiled_image} />
     </div>`
 )
 
