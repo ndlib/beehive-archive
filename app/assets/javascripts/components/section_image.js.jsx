@@ -119,7 +119,7 @@ var SectionDescription = React.createClass({
   render: function () {
     var rawMarkup = false;
     if (this.props.section.description) {
-      rawMarkup = this.props.section.description.toString();
+      rawMarkup = converter.makeHtml(this.props.section.description.toString())
     }
 
     if (rawMarkup) {
