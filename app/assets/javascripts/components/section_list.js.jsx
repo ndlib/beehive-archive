@@ -1,3 +1,5 @@
+//= require jquery
+
 var SectionList = React.createClass({
   propTypes: {
     sections: React.PropTypes.array.isRequired,
@@ -6,15 +8,14 @@ var SectionList = React.createClass({
     onDrop: React.PropTypes.func.isRequired
   },
   sectionRows: function() {
-    var i, rows, section, key;
+    var rows, self;
     rows = [];
-    i = 0;
-    while (i < this.props.sections.length) {
-      section = this.props.sections[i];
-      rows.push(this.section_tag(section));
-      rows.push(this.dropzone_tag(section.order))
-      i++;
-    }
+    self = this
+    $.each(this.props.sections, function(idx, section) {
+      rows.push(self.section_tag(section));
+      rows.push(self.dropzone_tag(section.order))
+    });
+
     if (rows.length === 0) {
       rows.push(this.dropzone_tag(0));
     }
