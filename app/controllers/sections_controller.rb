@@ -42,7 +42,16 @@ class SectionsController < ApplicationController
   end
 
   def destroy
+    @section = Section.find(params[:id])
 
+    respond_to do |format|
+
+      if @section.destroy
+        format.json { render json: 'Item Deleted successfully', status: 202 }
+        format.any { redirect_to :index }
+      end
+
+    end
   end
 
   protected
