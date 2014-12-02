@@ -11,7 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141125150942) do
+ActiveRecord::Schema.define(version: 20141202175831) do
+
+  create_table "exhibits", force: true do |t|
+    t.text    "title"
+    t.text    "description"
+    t.integer "collection_id"
+  end
 
   create_table "sections", force: true do |t|
     t.string  "title"
@@ -20,6 +26,16 @@ ActiveRecord::Schema.define(version: 20141125150942) do
     t.integer "item_id"
     t.integer "order"
     t.text    "caption"
+  end
+
+  create_table "showcases", force: true do |t|
+    t.text     "title"
+    t.text     "description"
+    t.integer  "exhibit_id"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
   end
 
 end
