@@ -1,5 +1,9 @@
 class ExhibitsController < ApplicationController
 
+  def index
+    @exhibits = ExhibitQuery.new.all_for_user(current_user)
+  end
+
   def show
     @exhibit = Exhibit.find(params[:id])
   end

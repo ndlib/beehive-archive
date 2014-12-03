@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
   root 'application#index'
 
+  devise_for :users, controllers: { cas_sessions: 'simple_cas' }
+
   resources :sections
+
   resources :exhibits do
     member do
       get :items, defaults: {format: :json}
