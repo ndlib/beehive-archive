@@ -1,0 +1,10 @@
+<%= simple_form_for @exhibit, :html => { :class => 'form-horizontal' } do |f| %>
+  <%# display_errors(@exhibit) %>
+
+  <%= f.input :title %>
+  <%= f.input :collection_id, value: 1, as: :hidden %>
+  <%= f.button :submit, :class => 'btn-primary' %>
+  <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                exhibits_path, :class => 'btn btn-default' %>
+<% end %>
+
