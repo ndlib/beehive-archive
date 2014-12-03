@@ -8,6 +8,38 @@ class ExhibitsController < ApplicationController
     @exhibit = Exhibit.find(params[:id])
   end
 
+  def new
+    @exhibit = Exhibit.new
+  end
+
+  def create
+    @exhibit = Exhibit.new(save_params)
+
+    if @exhibit.save
+      redirect_to @exhibit
+    else
+      render :new
+    end
+  end
+
+  def edit
+    @exhibit = Exhibit.find(params[:id])
+  end
+
+  def update
+    @exhibit = Exhibit.find(params[:id])
+
+    if @exhibit.update_attributes(save_params)
+      redirect_to @exhibit
+    else
+      render :edit
+    end
+  end
+
+  def destroy
+
+  end
+
   def items
     @exhibit = Exhibit.find(params[:id])
 
@@ -19,4 +51,10 @@ class ExhibitsController < ApplicationController
       end
     end
   end
+
+  protected
+
+    def save_params
+      params.require(:exhibit).permit([:title, :collection_id]
+    end
 end
