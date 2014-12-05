@@ -6,6 +6,6 @@ class Showcase < ActiveRecord::Base
 
 
   validates :title, :exhibit, presence: true
-  validates :image, attachment_presence: true
+#  validates :image, attachment_presence: true
 
 end

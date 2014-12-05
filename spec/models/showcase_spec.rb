@@ -9,7 +9,7 @@ RSpec.describe Showcase do
     end
   end
 
-  [:exhibit, :image, :title].each do | field |
+  [:exhibit, :title].each do | field |
     it "requires the field, #{field}" do
       expect(subject).to have(1).error_on(field)
     end

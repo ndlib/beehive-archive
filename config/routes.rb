@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   resources :sections
 
   resources :exhibits do
+    resources :showcases
+
     member do
       get :items, defaults: {format: :json}
     end
