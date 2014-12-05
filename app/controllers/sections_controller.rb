@@ -1,8 +1,7 @@
 class SectionsController < ApplicationController
-  before_action :set_exhibit
 
   def index
-    @sections = SectionQuery.new.all_in_exhibit
+    @sections = SectionQuery.new.all_in_showcase(showcase)
   end
 
   def show
@@ -60,7 +59,11 @@ class SectionsController < ApplicationController
       params.require(:section).permit(:title, :image, :item_id, :description, :order, :caption)
     end
 
-    def set_exhibit
-      @exhibit = Exhibit.find(1)
+    def exhibit
+      @exhibit ||= Exhibit.find(params[:exhibit_id])
+    end
+
+    def showcase
+      @showcase ||= exhibit.showcases.find(params[:showcase_id])
     end
 end
