@@ -3,7 +3,7 @@
 
   <%= f.input :title %>
   <%= f.input :collection_id, value: 1, as: :hidden %>
-  <%= f.button :submit, :class => 'btn-primary' %>
+  <%= f.button :submit, :class => 'btn-primary', value: "Save" %>
   <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
                 exhibits_path, :class => 'btn btn-default' %>
 <% end %>

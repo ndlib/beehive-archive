@@ -16,7 +16,7 @@ class ExhibitsController < ApplicationController
     @exhibit = Exhibit.new(save_params)
 
     if @exhibit.save
-      redirect_to @exhibit
+      redirect_to exhibits_path
     else
       render :new
     end
@@ -30,14 +30,18 @@ class ExhibitsController < ApplicationController
     @exhibit = Exhibit.find(params[:id])
 
     if @exhibit.update_attributes(save_params)
-      redirect_to @exhibit
+      redirect_to exhibits_path
     else
       render :edit
     end
   end
 
   def destroy
+    @exhibit = Exhibit.find(params[:id])
 
+    if @exhibit.destroy()
+      redirect_to exhibits_path
+    end
   end
 
   def items
@@ -55,6 +59,6 @@ class ExhibitsController < ApplicationController
   protected
 
     def save_params
-      params.require(:exhibit).permit([:title, :collection_id]
+      params.require(:exhibit).permit([:title, :collection_id])
     end
 end
