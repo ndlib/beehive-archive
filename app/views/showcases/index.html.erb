@@ -1,0 +1,24 @@
+
+<%- model_class = Showcase -%>
+<div class="page-header">
+    <div class="pull-right">
+      <%= link_to t('.new', :default => t("New Showcase")),
+              new_exhibit_showcase_path(1),
+              :class => 'btn btn-primary' %>
+    </div>
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:title) %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @showcases.each do |showcase| %>
+      <tr>
+        <td><%= link_to showcase.title, exhibit_showcase_path(showcase.exhibit, showcase) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
