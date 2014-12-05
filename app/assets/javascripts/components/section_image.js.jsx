@@ -16,3 +16,8 @@ var SectionImage = React.createClass({
   }
 
 });
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> FETCH_HEAD
