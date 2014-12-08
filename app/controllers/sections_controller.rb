@@ -15,10 +15,9 @@ class SectionsController < ApplicationController
   def create
     @section = showcase.sections.build
 
-    puts @section.errors.inspect
     respond_to do |format|
       if SaveSection.call(@section, section_params)
-        format.html { redirect_to exhibit_showcase_sections_path(exhibit, showcase), notice: 'Section Created' }
+        format.html { redirect_to exhibit_showcase_sections_path(exhibit.id, showcase.id), notice: 'Section Created' }
         format.json { render :show, status: :created, location: exhibit_showcase_section_path(exhibit, showcase, @section) }
       else
         format.html { render :new }
@@ -36,7 +35,7 @@ class SectionsController < ApplicationController
 
     respond_to do |format|
       if SaveSection.call(@section, section_params)
-        format.html { redirect_to exhibit_showcase_sections_path(exhibit, showcase), notice: 'Section updated.' }
+        format.html { redirect_to exhibit_showcase_sections_path(exhibit.id, showcase.id), notice: 'Section updated.' }
         format.json { render :show, status: :updated, location: @section }
       else
         format.html { render :edit }
@@ -52,7 +51,7 @@ class SectionsController < ApplicationController
 
       if @section.destroy
         format.json { render json: 'Section deleted successfully', status: 202 }
-        format.any { redirect_to :index }
+        format.any { redirect_to  exhibit_showcase_sections_path(exhibit.id, showcase.id) }
       end
 
     end
