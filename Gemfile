@@ -25,8 +25,8 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 
 gem "therubyracer"
 
-gem "hesburgh_infrastructure", git: 'git@git.library.nd.edu:hesburgh_infrastructure'
-gem "hesburgh_api", git: 'git@git.library.nd.edu:hesburgh_api'
+gem "hesburgh_infrastructure", git: 'https://github.com/ndlib/hesburgh_infrastructure.git'
+gem "hesburgh_api", git: 'https://github.com/ndlib/hesburgh_api.git'
 
 gem 'devise'
 gem 'devise_cas_authenticatable'
