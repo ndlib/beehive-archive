@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141202184140) do
+ActiveRecord::Schema.define(version: 20141208153315) do
 
   create_table "exhibits", force: true do |t|
     t.text    "title"
@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 20141202184140) do
     t.integer "item_id"
     t.integer "order"
     t.text    "caption"
+    t.integer "showcase_id"
   end
 
   create_table "showcases", force: true do |t|

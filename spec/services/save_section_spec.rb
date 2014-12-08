@@ -3,8 +3,9 @@ require 'rails_helper'
 describe SaveSection do
   subject { described_class.call(section, params) }
 
-  let(:section) { double(Section, "attributes=" => true, save: true, "order=" => true, order: 1, "order=" => true) }
+  let(:section) { double(Section, "attributes=" => true, save: true, "order=" => true, order: 1, "order=" => true, showcase: showcase) }
   let(:params) { { title: 'title', item_id: 1, order: 1, image: 'image', order: 1 } }
+  let(:showcase) { double(Showcase, id: 1, sections: double(order: true) )}
 
 
   context "successful save" do

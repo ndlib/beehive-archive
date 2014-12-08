@@ -46,6 +46,8 @@ gem 'autoprefixer-rails'
 gem 'simple_form', '~> 3.1.0rc1'
 gem 'paperclip'
 
+gem 'draper'
+
 group :development, :test do
   gem "pry"
   gem "rspec-rails"

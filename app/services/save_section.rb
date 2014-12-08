@@ -24,7 +24,7 @@ class SaveSection
   private
 
     def current_order
-      @current_order ||= SectionQuery.new.all_in_exhibit
+      @current_order ||= SectionQuery.new.all_in_showcase(section.showcase)
     end
 
     def fix_order!

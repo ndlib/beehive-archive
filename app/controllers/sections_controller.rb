@@ -1,7 +1,7 @@
 class SectionsController < ApplicationController
 
   def index
-    @sections = SectionQuery.new.all_in_showcase(showcase)
+    @sections = ShowcaseList.new(SectionQuery.new.all_in_showcase(showcase), showcase)
   end
 
   def show
