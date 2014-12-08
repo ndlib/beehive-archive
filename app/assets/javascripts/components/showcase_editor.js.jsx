@@ -1,3 +1,5 @@
+/** @jsx React.DOM */
+
 var ShowcaseEditor = React.createClass({
   propTypes: {
     sectionsJSONPath: React.PropTypes.string.isRequired,

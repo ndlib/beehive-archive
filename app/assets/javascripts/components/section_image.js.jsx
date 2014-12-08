@@ -1,3 +1,5 @@
+/** @jsx React.DOM */
+
 var SectionImage = React.createClass({
   propTypes: {
     section: React.PropTypes.object.isRequired

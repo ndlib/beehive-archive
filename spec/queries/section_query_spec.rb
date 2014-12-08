@@ -1,6 +1,5 @@
 require 'rails_helper'
 
-
 RSpec.describe SectionQuery do
 
   describe "#all_for_showcase" do
@@ -17,6 +16,7 @@ RSpec.describe SectionQuery do
       expect(sections).to receive(:order).with(:order)
       subject.all_in_showcase(showcase)
     end
+
 
   end
 end

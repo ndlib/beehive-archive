@@ -1,3 +1,4 @@
+/** @jsx React.DOM */
 
 var TiledImage = React.createClass({
   propTypes: {

@@ -1,3 +1,5 @@
+/** @jsx React.DOM */
+
 var AddItemsBar;
 
 AddItemsBar = React.createClass({

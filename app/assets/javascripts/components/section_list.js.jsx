@@ -1,4 +1,4 @@
-//= require jquery
+/** @jsx React.DOM */
 
 var SectionList = React.createClass({
   propTypes: {

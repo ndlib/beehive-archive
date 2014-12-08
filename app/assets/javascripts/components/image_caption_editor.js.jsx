@@ -1,4 +1,4 @@
-
+/** @jsx React.DOM */
 
 var ImageCaptionEditor = React.createClass({
   getInitialState: function() {

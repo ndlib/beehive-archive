@@ -1,3 +1,5 @@
+/** @jsx React.DOM */
+
 var ItemList;
 
 ItemList = React.createClass({
