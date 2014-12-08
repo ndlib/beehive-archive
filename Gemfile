@@ -64,7 +64,7 @@ group :development, :test do
   gem "guard-rspec"
   gem "guard-spring"
   gem "growl"
-  gem "growl_notify"
+  gem "ruby_gntp"
   gem "growl-rspec"
 end
 
