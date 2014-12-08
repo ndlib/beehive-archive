@@ -1,25 +1,20 @@
-<div>
-  <h1>New Section</h1>
-  <form className="slideForm" onSubmit={this.handleSubmit}>
-    <div className="form-group">
-      <label className="control-label" forName="titleInput">Title</label>
-      <input type="text" id="titleInput" className="form-control" placeholder="Your name" ref="title" defaultValue={this.props.item.title} />
+<h1>New Section</h1>
+
+<%= simple_form_for [@section.showcase.exhibit, @section.showcase, @section] do | f | %>
+
+  <div class="row">
+    <div class="col-md-6">
+      <%= react_component('ImageCaptionEditor', {image: f.object.image, fieldName: "section[caption]", caption: f.object.caption}, {prerender: false}) %>
     </div>
-    <div className="row">
-      <div className="col-md-6">
-        <img src={this.props.item.links.tiled_image.uri} width="100%" />
-      </div>
-      <div className="col-md-6">
-        <div className="form-group">
-          <label className="control-label" forName="sectionDescription">Description</label>
-          <textarea className="form-control" id="sectionDescription" rows="3" placeholder="Say something..." ref="description" />
-        </div>
-      </div>
+    <div class="col-md-6">
+      <%= f.input :title %>
+
+      <p><%= link_to "Add Intro" %> </p>
+
+      <%= f.input :description, as: :text %>
     </div>
-    <input type="hidden" ref="item_id" value={this.props.item.id} />
-    <input type="hidden" ref="image" value={this.props.item.links.tiled_image.uri} />
-    <div className="form-group">
-      <button className="btn btn-primary">Save</button>
-    </div>
-  </form>
-</div>
+  </div>
+  <div class="form-group">
+    <button class="btn btn-primary">Save</button>
+  </div>
+<% end %>
