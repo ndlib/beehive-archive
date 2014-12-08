@@ -1,3 +1,5 @@
 class Section < ActiveRecord::Base
-  validates :image, :item_id, presence: true
+  belongs_to :showcase
+
+  validates :image, :item_id, :showcase, presence: true
 end

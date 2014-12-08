@@ -1,8 +1,13 @@
 Rails.application.routes.draw do
   root 'application#index'
 
-  resources :sections
+  devise_for :users, controllers: { cas_sessions: 'simple_cas' }
+
   resources :exhibits do
+    resources :showcases do
+      resources :sections
+    end
+
     member do
       get :items, defaults: {format: :json}
     end

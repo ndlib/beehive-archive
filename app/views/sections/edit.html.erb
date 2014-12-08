@@ -1,6 +1,6 @@
 <h1>Edit Section</h1>
 
-<%= simple_form_for @section do | f | %>
+<%= simple_form_for [@section.showcase.exhibit, @section.showcase, @section] do | f | %>
 
   <div class="row">
     <div class="col-md-6">

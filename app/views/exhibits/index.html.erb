@@ -1,0 +1,27 @@
+
+<%- model_class = Exhibit -%>
+<div class="page-header">
+    <div class="pull-right">
+      <%= link_to t('.new', :default => t("New Exhibit")),
+              new_exhibit_path,
+              :class => 'btn btn-primary' %>
+    </div>
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:title) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @exhibits.each do |exhibit| %>
+      <tr>
+        <td><%= link_to exhibit.title, exhibit_path(exhibit) %></td>
+        <td>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

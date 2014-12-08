@@ -38,4 +38,5 @@ Rails.application.configure do
   config.react.variant = :development
 
   config.honeycomb_url = "http://localhost:3017"
+  config.beehive_cas_base  = 'https://cas.library.nd.edu/cas'
 end

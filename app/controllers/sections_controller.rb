@@ -1,21 +1,24 @@
 class SectionsController < ApplicationController
-  before_action :set_exhibit
 
   def index
-    @sections = SectionQuery.new.all_in_exhibit
+    @sections = ShowcaseList.new(SectionQuery.new.all_in_showcase(showcase), showcase)
   end
 
   def show
-    @section = Section.find(params[:id])
+    @section = showcase.sections.find(params[:id])
+  end
+
+  def new
+    @section = showcase.sections.build
   end
 
   def create
-    @section = Section.new
+    @section = showcase.sections.build
 
     respond_to do |format|
       if SaveSection.call(@section, section_params)
-        format.html { redirect_to @section, notice: 'Comment was successfully created.' }
-        format.json { render :show, status: :created, location: @section }
+        format.html { redirect_to exhibit_showcase_sections_path(exhibit.id, showcase.id), notice: 'Section Created' }
+        format.json { render :show, status: :created, location: exhibit_showcase_section_path(exhibit, showcase, @section) }
       else
         format.html { render :new }
         format.json { render json: @section.errors, status: :unprocessable_entity }
@@ -24,15 +27,15 @@ class SectionsController < ApplicationController
   end
 
   def edit
-    @section = Section.find(params[:id])
+    @section = showcase.sections.find(params[:id])
   end
 
   def update
-    @section = Section.find(params[:id])
+    @section = showcase.sections.find(params[:id])
 
     respond_to do |format|
       if SaveSection.call(@section, section_params)
-        format.html { redirect_to sections_path, notice: 'Comment was successfully updated.' }
+        format.html { redirect_to exhibit_showcase_sections_path(exhibit.id, showcase.id), notice: 'Section updated.' }
         format.json { render :show, status: :updated, location: @section }
       else
         format.html { render :edit }
@@ -42,13 +45,13 @@ class SectionsController < ApplicationController
   end
 
   def destroy
-    @section = Section.find(params[:id])
+    @section = showcase.sections.find(params[:id])
 
     respond_to do |format|
 
       if @section.destroy
-        format.json { render json: 'Item Deleted successfully', status: 202 }
-        format.any { redirect_to :index }
+        format.json { render json: 'Section deleted successfully', status: 202 }
+        format.any { redirect_to  exhibit_showcase_sections_path(exhibit.id, showcase.id) }
       end
 
     end
@@ -60,7 +63,11 @@ class SectionsController < ApplicationController
       params.require(:section).permit(:title, :image, :item_id, :description, :order, :caption)
     end
 
-    def set_exhibit
-      @exhibit = Exhibit.find(1)
+    def exhibit
+      @exhibit ||= Exhibit.find(params[:exhibit_id])
+    end
+
+    def showcase
+      @showcase ||= exhibit.showcases.find(params[:showcase_id])
     end
 end

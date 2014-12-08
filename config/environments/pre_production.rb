@@ -83,4 +83,6 @@ Rails.application.configure do
   config.react.variant = :production
 
   config.honeycomb_url = "https://honeycombpprd-vm.library.nd.edu"
+  config.beehive_cas_base = 'https://login.nd.edu/cas'
+
 end

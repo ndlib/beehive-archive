@@ -1,3 +1,5 @@
+/** @jsx React.DOM */
+
 var NewSectionDropzone = React.createClass({
   getInitialState: function() {
     return {

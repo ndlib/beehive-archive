@@ -78,6 +78,10 @@ GEM
       xpath (~> 2.0)
     celluloid (0.16.0)
       timers (~> 4.0.0)
+    climate_control (0.0.3)
+      activesupport (>= 3.0)
+    cocaine (0.5.4)
+      climate_control (>= 0.0.3, < 1.0)
     coderay (1.1.0)
     coffee-rails (4.0.1)
       coffee-script (>= 2.2.0)
@@ -98,6 +102,11 @@ GEM
       devise (>= 1.2.0)
       rubycas-client (>= 2.2.1)
     diff-lcs (1.2.5)
+    draper (1.4.0)
+      actionpack (>= 3.0)
+      activemodel (>= 3.0)
+      activesupport (>= 3.0)
+      request_store (~> 1.0)
     erubis (2.7.0)
     ethon (0.7.1)
       ffi (>= 1.3.0)
@@ -175,6 +184,11 @@ GEM
     nokogiri (1.6.4.1)
       mini_portile (~> 0.6.0)
     orm_adapter (0.5.0)
+    paperclip (4.2.0)
+      activemodel (>= 3.0.0)
+      activesupport (>= 3.0.0)
+      cocaine (~> 0.5.3)
+      mime-types
     pry (0.10.1)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
@@ -207,6 +221,7 @@ GEM
       json (~> 1.4)
     react-source (0.12.0)
     ref (1.0.5)
+    request_store (1.1.0)
     responders (1.1.2)
       railties (>= 3.2, < 4.2)
     rspec (3.1.0)
@@ -293,6 +308,7 @@ DEPENDENCIES
   coffee-rails (~> 4.0.0)
   devise
   devise_cas_authenticatable
+  draper
   faker
   growl
   growl-rspec
@@ -309,6 +325,7 @@ DEPENDENCIES
   jquery-rails
   mysql2
   newrelic_rpm
+  paperclip
   pry
   rails (= 4.1.7)
   rb-readline

@@ -1,3 +1,4 @@
+/** @jsx React.DOM */
 
 var SectionImage = React.createClass({
   propTypes: {
@@ -17,4 +18,3 @@ var SectionImage = React.createClass({
   }
 
 });
-
