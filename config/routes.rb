@@ -8,9 +8,7 @@ Rails.application.routes.draw do
       resources :sections
     end
 
-    member do
-      get :items, defaults: {format: :json}
-    end
+    resources :items, only: [:index, :show], defaults: {format: :json}
   end
 
   # The priority is based upon order of creation: first created -> highest priority.
