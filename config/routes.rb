@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root 'application#index'
+  root 'exhibits#index'
 
   devise_for :users, controllers: { cas_sessions: 'simple_cas' }
 

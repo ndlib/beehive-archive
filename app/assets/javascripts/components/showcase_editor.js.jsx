@@ -95,7 +95,7 @@ var ShowcaseEditor = React.createClass({
     }
     return (
     <div className={this.divclassname}>
-      <h1>Sections</h1>
+      <h2>Sections</h2>
       <div className="sections-content">
         <SectionList sections={this.state.sections} onSectionClick={this.sectionClick} currentDragItem={this.state.currentDragItem} onDrop={this.onDrop} />
       </div>
