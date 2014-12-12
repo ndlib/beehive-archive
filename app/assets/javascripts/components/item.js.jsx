@@ -76,15 +76,15 @@ Item = React.createClass({
     return document.removeEventListener('mouseup', this.onMouseUp);
   },
   render: function() {
-    var dragclass, image, tiled_image;
+    var dragclass, honeypot_image;
     dragclass = "drag ";
     if (this.state.dragging) {
       dragclass = "" + dragclass + " dragging";
     }
-    tiled_image = this.props.item.links.tiled_image;
+    honeypot_image = this.props.item.links.image;
     return (
       <div className={dragclass} onMouseDown={this.onMouseDown} style={this.style()}>
-        <TiledImage tiled_image={tiled_image} />
+        <HoneypotImage honeypot_image={honeypot_image} style="small" />
       </div>);
   }
 });
