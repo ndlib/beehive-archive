@@ -66,6 +66,8 @@ group :development, :test do
   gem "growl"
   gem "ruby_gntp"
   gem "growl-rspec"
+
+  gem 'coveralls', require: false
 end
 
 
