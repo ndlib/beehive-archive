@@ -22,4 +22,11 @@ RSpec.describe Exhibit do
     end
   end
 
+  describe '#item_json_url' do
+    it 'is a url to the honeycomb server' do
+      subject.collection_id = 100
+      expect(subject.item_json_url(5)).to eq("http://localhost:3017/api/collections/100/items/5.json?include=image")
+    end
+  end
+
 end
