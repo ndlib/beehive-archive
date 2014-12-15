@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root 'application#index'
+  root 'exhibits#index'
 
   devise_for :users, controllers: { cas_sessions: 'simple_cas' }
 
@@ -8,9 +8,7 @@ Rails.application.routes.draw do
       resources :sections
     end
 
-    member do
-      get :items, defaults: {format: :json}
-    end
+    resources :items, only: [:index, :show], defaults: {format: :json}
   end
 
   # The priority is based upon order of creation: first created -> highest priority.

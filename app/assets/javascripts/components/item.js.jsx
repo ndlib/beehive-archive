@@ -16,9 +16,10 @@ Item = React.createClass({
   style: function() {
     if (this.state.dragging) {
       return {
-        position: 'absolute',
+        position: 'fixed',
         left: this.state.left,
-        top: this.state.top
+        top: this.state.top,
+        zIndex: '1000',
       };
     } else {
       return {};
@@ -33,8 +34,8 @@ Item = React.createClass({
       pageOffset = this.getDOMNode().getBoundingClientRect();
       return this.setState({
         mouseDown: true,
-        originX: event.pageX,
-        originY: event.pageY,
+        viewportOriginX: event.pageX - document.body.scrollLeft,
+        viewportOriginY: event.pageY - document.body.scrollTop,
         elementX: pageOffset.left,
         elementY: pageOffset.top
       });
@@ -42,8 +43,8 @@ Item = React.createClass({
   },
   onMouseMove: function(event) {
     var deltaX, deltaY, distance;
-    deltaX = event.pageX - this.state.originX;
-    deltaY = event.pageY - this.state.originY;
+    deltaX = (event.pageX - document.body.scrollLeft) - this.state.viewportOriginX;
+    deltaY = (event.pageY - document.body.scrollTop) - this.state.viewportOriginY;
     distance = Math.abs(deltaX) + Math.abs(deltaY);
     if (!this.state.dragging && distance > DRAG_THRESHOLD) {
       this.setState({
@@ -53,8 +54,8 @@ Item = React.createClass({
     }
     if (this.state.dragging) {
       return this.setState({
-        left: this.state.elementX + deltaX + document.body.scrollLeft,
-        top: this.state.elementY + deltaY + document.body.scrollTop
+        left: this.state.elementX + deltaX,
+        top: this.state.elementY + deltaY
       });
     }
   },
@@ -76,15 +77,15 @@ Item = React.createClass({
     return document.removeEventListener('mouseup', this.onMouseUp);
   },
   render: function() {
-    var dragclass, image, tiled_image;
+    var dragclass, honeypot_image;
     dragclass = "drag ";
     if (this.state.dragging) {
       dragclass = "" + dragclass + " dragging";
     }
-    tiled_image = this.props.item.links.tiled_image;
+    honeypot_image = this.props.item.links.image;
     return (
       <div className={dragclass} onMouseDown={this.onMouseDown} style={this.style()}>
-        <TiledImage tiled_image={tiled_image} />
+        <HoneypotImage honeypot_image={honeypot_image} style="small" />
       </div>);
   }
 });

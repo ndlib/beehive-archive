@@ -27,12 +27,10 @@ var ShowcaseEditor = React.createClass({
     });
   },
   handleItemDrop: function(item, index) {
-    var filename, id, image, section, sections, split_path, tiled_image;
-    tiled_image = item.links.tiled_image;
-    split_path = tiled_image.path.split('/');
-    filename = split_path.pop();
-    id = split_path.pop();
-    image = "http://localhost:3017/system/items/images/000/000/" + id + "/original/" + filename;
+    var image, section, sections, style_path, honeypot_image;
+    honeypot_image = item.links.image;
+    style_path = honeypot_image.styles.medium.path;
+    image = "http://localhost:3019/images/" + style_path;
     section = {
       id: 'new',
       title: item.title,
@@ -95,7 +93,7 @@ var ShowcaseEditor = React.createClass({
     }
     return (
     <div className={this.divclassname}>
-      <h1>Sections</h1>
+      <h2>Sections</h2>
       <div className="sections-content">
         <SectionList sections={this.state.sections} onSectionClick={this.sectionClick} currentDragItem={this.state.currentDragItem} onDrop={this.onDrop} />
       </div>

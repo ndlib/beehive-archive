@@ -9,7 +9,7 @@ class ExhibitsController < ApplicationController
   end
 
   def new
-    @exhibit = Exhibit.new
+    @exhibit = Exhibit.new(collection_id: 1)
   end
 
   def create

@@ -1,5 +1,7 @@
+<h1><%= @exhibit.title %> > <%= @showcase.title %></h1>
+
 <%= react_component 'ShowcaseEditor', {
-          itemsJSONPath: items_exhibit_path(@sections.exhibit, :json),
+          itemsJSONPath: exhibit_items_path(@sections.exhibit, :json),
           sectionsPath: exhibit_showcase_sections_path(@sections.exhibit, @sections.showcase),
           sectionsJSONPath: exhibit_showcase_sections_path(@sections.exhibit, @sections.showcase, :json) },
          {prerender: false }
