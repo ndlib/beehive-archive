@@ -11,5 +11,10 @@
 </div>
 
 <div class="row">
-
+  <div class="col-md-12">
+    <h2>Showcases</h2>
+    <% @exhibit.showcases.each do |showcase| %>
+      <p><%= link_to showcase.title, exhibit_showcase_path(@exhibit, showcase) %></p>
+    <% end %>
+  </div>
 </div>
