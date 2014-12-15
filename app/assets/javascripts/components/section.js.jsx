@@ -16,7 +16,7 @@ var Section = React.createClass({
       <div className="section">
         <SectionImage section={this.props.section} />
         <SectionDescription section={this.props.section} />
-        <div className="edit" onClick={this.handleClick}>Edit</div>
+        <div className="section-edit" onClick={this.handleClick}>Edit</div>
       </div>
     );
   }

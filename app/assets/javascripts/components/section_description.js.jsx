@@ -15,7 +15,7 @@ var SectionDescription = React.createClass({
     }
 
     if (rawMarkup) {
-      return (<div className="section-container">
+      return (<div className="section-container section-container-text">
         <h2>{this.props.section.title}</h2>
         <div className="section-description" dangerouslySetInnerHTML={{__html: rawMarkup}}  />
       </div>)

@@ -11,7 +11,7 @@ var SectionImage = React.createClass({
       caption = (<div className="section-caption">{this.props.section.caption}</div>)
     }
 
-    return (<div className="section-container">
+    return (<div className="section-container section-container-image">
       <img src={this.props.section.image } />
       { caption }
     </div>)

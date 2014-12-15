@@ -20,22 +20,26 @@
   margin: 10px;
   border: 1px solid lightgrey;
   float: left;
+  position: relative;
 }
 
 .section-container {
-  width: 300px;
-  height: 400px;
-  padding: 5px;
   float: left;
+  height: 476px;
   display: inline;
+}
+
+.section-container-text {
+  padding: 5px;
+  width: 300px;
   overflow: scroll;
 }
 
-.section img {
-  width: 300px;
+.section-container-image img {
+  height: 100%;
 }
 
-.section .delete {
+.section-delete {
   position: absolute;
   background: gray;
   padding-left: 5px;
@@ -45,23 +49,23 @@
   display: none;
 }
 
-.section .edit {
-  clear: both;
+.section-edit {
+  position: absolute;
+  bottom: 0;
+  left: 0;
   background: gray;
   width: 100%;
-  display: none;
+  display: block;
   padding: 8px;
   text-align: center;
+  visibility: hidden;
 }
 
-.section:hover .edit {
-  cursor: pointer;
-  display: block;
-}
-
-.section:hover .delete {
-  cursor: pointer;
-  display: none;
+.section:hover {
+  .section-edit, .section-delete {
+    cursor: pointer;
+    visibility: visible;;
+  }
 }
 
 .section-description {}
@@ -78,13 +82,36 @@
   padding: 2px;
 }
 
-.section_spacer {
-  border: dashed;
-  height: 360px;
-  width: 40px;
-  margin: 25px;
+.section-spacer {
+  height: 440px;
+  width: auto;
+  margin: 25px 0;
+  padding: 0 25px;
   display: inline;
   float: left;
+}
+
+.section-spacer-inner {
+  border: dashed;
+  height: 100%;
+  width: 40px;
+}
+
+.section-spacer.active {
+  &.hover {
+    .section-spacer-inner {
+      width: 80px;
+      background-color: green;
+    }
+  }
+}
+
+.section-spacer-content {
+  display: none;
+}
+
+.section-spacer.active .section-spacer-content {
+  display: block;
 }
 
 .add-items-content {
@@ -106,21 +133,6 @@
 .add-items-content img {
   height: 100px;
   margin: 5px;
-}
-
-.section_spacer.active {
-  &.hover {
-    width: 80px;
-    background-color: green;
-  }
-}
-
-.section_spacer div {
-  display: none;
-}
-
-.section_spacer.active div {
-  display: block;
 }
 
 .drag {
