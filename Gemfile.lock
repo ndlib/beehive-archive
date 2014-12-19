@@ -9,14 +9,6 @@ GIT
       react-source (= 0.12)
 
 GIT
-  remote: https://github.com/ndlib/waggle.git
-  revision: 18f1c220c48ec8472e7d8d0d4ca24d0e9ca59f56
-  specs:
-    waggle (0.0.1)
-      draper
-      rails (~> 4.1.4)
-
-GIT
   remote: https://github.com/ndlib/hesburgh_api.git
   revision: 011278415e97f2a0631d38b9d76cf60923200802
   specs:
@@ -35,6 +27,14 @@ GIT
     hesburgh_infrastructure (0.2.4)
       capistrano (~> 2.15.0)
       rails
+
+GIT
+  remote: https://github.com/ndlib/waggle.git
+  revision: 18f1c220c48ec8472e7d8d0d4ca24d0e9ca59f56
+  specs:
+    waggle (0.0.1)
+      draper
+      rails (~> 4.1.4)
 
 GEM
   remote: https://rubygems.org/
