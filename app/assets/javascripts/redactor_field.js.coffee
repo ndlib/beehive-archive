@@ -9,7 +9,6 @@ window.RedactorPlugins.bufferbuttons = ->
 
 
 jQuery ->
-
   $('#section_description').redactor(
       buttonSource: true
       plugins: ['bufferbuttons']

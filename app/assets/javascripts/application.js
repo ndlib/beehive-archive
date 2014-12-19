@@ -14,6 +14,8 @@
 //= require jquery_ujs
 //= require bootstrap-sprockets
 //= require showdown
+//= require redactor
+//= require redactor_field
 //= require react
 //= require react_ujs
 //= require components
