@@ -7,7 +7,7 @@ var NewSectionDropzone = React.createClass({
     };
   },
   classes: function() {
-    return ['section_spacer', this.active() ? 'active' : void 0, this.state.hover ? 'hover' : void 0].join(' ');
+    return ['section-spacer', this.active() ? 'active' : void 0, this.state.hover ? 'hover' : void 0].join(' ');
   },
   onMouseEnter: function() {
     return this.setState({
@@ -30,7 +30,9 @@ var NewSectionDropzone = React.createClass({
   render: function() {
     return (
       <div className={this.classes()} onMouseEnter={this.onMouseEnter} onMouseLeave={this.onMouseLeave} onMouseUp={this.onDrop}>
-        <div>Create New Section HERE!!</div>
+        <div className="section-spacer-inner">
+          <div className="section-spacer-content">Create New Section HERE!!</div>
+        </div>
      </div>);
   }
 });
