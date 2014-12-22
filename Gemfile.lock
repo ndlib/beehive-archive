@@ -9,6 +9,16 @@ GIT
       react-source (= 0.12)
 
 GIT
+  remote: https://github.com/ndlib/waggle.git
+  revision: eb08a57cfa2c2fcafd2c3ae345b70fd2f8cefa19
+  specs:
+    waggle (0.0.1)
+      autoprefixer-rails
+      bootstrap-sass (~> 3.3.1)
+      draper
+      rails (~> 4.1.4)
+
+GIT
   remote: https://github.com/ndlib/hesburgh_api.git
   revision: 011278415e97f2a0631d38b9d76cf60923200802
   specs:
@@ -26,14 +36,6 @@ GIT
   specs:
     hesburgh_infrastructure (0.2.5)
       rails
-
-GIT
-  remote: https://github.com/ndlib/waggle.git
-  revision: 93498f11c8a890d477e6d34279ff22a8c710f84f
-  specs:
-    waggle (0.0.1)
-      draper
-      rails (~> 4.1.4)
 
 GEM
   remote: https://rubygems.org/
@@ -65,10 +67,10 @@ GEM
       thread_safe (~> 0.1)
       tzinfo (~> 1.1)
     arel (5.0.1.20140414130214)
-    autoprefixer-rails (4.0.0)
+    autoprefixer-rails (4.0.2.1)
       execjs
     bcrypt (3.1.9)
-    bootstrap-sass (3.2.0.2)
+    bootstrap-sass (3.3.1.0)
       sass (~> 3.2)
     builder (3.2.2)
     capistrano (3.3.5)
@@ -332,8 +334,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  autoprefixer-rails
-  bootstrap-sass (~> 3.2.0)
   capistrano (~> 3.1)
   capistrano-rails (~> 1.1)
   capybara
