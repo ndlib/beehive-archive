@@ -5,7 +5,11 @@ set :application, 'beehive'
 set :repo_url, 'https://github.com/ndlib/beehive.git'
 
 # Default branch is :master
-# ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }.call
+if fetch(:stage).to_s == 'production'
+  ask :branch, 'master'
+else
+  ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }.call
+end
 
 # Default deploy_to directory is /var/www/my_app
 set :deploy_to, '/home/app/beehive'
