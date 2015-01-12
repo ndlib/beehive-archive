@@ -30,7 +30,11 @@ var ShowcaseEditor = React.createClass({
     var image, section, sections, style_path, honeypot_image;
     honeypot_image = item.links.image;
     style_path = honeypot_image.styles.medium.path;
-    image = "http://localhost:3019/images/" + style_path;
+    if (honeypot_image.host == 'localhost') {
+      image = "http://localhost:3019/images" + style_path
+    } else {
+      image = window.location.protocol + "//" + honeypot_image.host + '/images' + style_path;
+    }
     section = {
       id: 'new',
       title: item.title,

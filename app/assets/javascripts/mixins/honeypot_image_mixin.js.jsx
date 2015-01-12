@@ -11,7 +11,7 @@ var HoneypotImageMixin = {
     };
   },
   path: function () {
-    return "/images/" + this.style().path
+    return "/images" + this.style().path
   },
   uri: function() {
     return this.base_uri() + this.path();
