@@ -16,6 +16,9 @@ AddItemsBar = React.createClass({
       url: this.props.itemsJSONPath,
       dataType: "json",
       success: (function(data) {
+        itemList = new beehive.HoneycombItemList()
+        itemList.loadData(data)
+        console.log(itemList.items)
         this.setState({
           items: data.items
         });
@@ -26,8 +29,8 @@ AddItemsBar = React.createClass({
     });
   },
   componentDidMount: function() {
-    this.loadItemsFromServer();
-    setInterval(this.loadItemsFromServer(), 8000);
+    this.loadItemsFromServer()
+    // setInterval(this.loadItemsFromServer, 8000);
   },
   render: function() {
     return (<ItemList onDragStart={this.props.onDragStart} onDragStop={this.props.onDragStop} items={this.state.items} />);
