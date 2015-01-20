@@ -1,4 +1,4 @@
-class beehive.ObjectList extends beehive.Module
+class beehive.BeehiveObjectList extends beehive.Module
   @mixin beehive.URLTemplates
 
   constructor: () ->
@@ -43,7 +43,7 @@ class beehive.ObjectList extends beehive.Module
     @addObject(@buildObject(objectData))
 
   buildObject: (objectData) ->
-    objectData
+    new beehive.BeehiveObject(objectData)
 
   find: (id) ->
     @objectsByID[id]

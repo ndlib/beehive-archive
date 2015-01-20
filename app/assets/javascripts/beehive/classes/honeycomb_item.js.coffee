@@ -1,3 +1,1 @@
-class beehive.HoneycombItem
-  constructor: (@data) ->
-    @id = @data.id
+class beehive.HoneycombItem extends beehive.BeehiveObject

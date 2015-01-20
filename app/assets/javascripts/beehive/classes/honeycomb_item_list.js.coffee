@@ -1,4 +1,4 @@
-class beehive.HoneycombItemList extends beehive.ObjectList
+class beehive.HoneycombItemList extends beehive.BeehiveObjectList
   constructor: (@exhibit_id) ->
     super()
 
