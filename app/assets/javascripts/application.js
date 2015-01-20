@@ -17,8 +17,7 @@
 //= require showdown
 //= require redactor
 //= require redactor_field
-//= require honeycomb_item
-//= require honeycomb_item_list
+//= require beehive/index
 //= require react
 //= require react_ujs
 //= require components

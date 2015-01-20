@@ -1,3 +1,3 @@
-class window.HoneycombItem
+class beehive.HoneycombItem
   constructor: (@data) ->
     @id = @data.id
