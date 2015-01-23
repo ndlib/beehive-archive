@@ -36,7 +36,6 @@ var ShowcaseEditor = React.createClass({
       title: item.title,
       image: image,
       item_id: item.id,
-      display_type: 'image',
       order: index
     };
     sections = this.state.sections;

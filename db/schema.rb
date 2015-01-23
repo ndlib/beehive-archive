@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150121191015) do
+ActiveRecord::Schema.define(version: 20141208153315) do
 
   create_table "exhibits", force: true do |t|
     t.text    "title"
@@ -27,10 +27,7 @@ ActiveRecord::Schema.define(version: 20150121191015) do
     t.integer "order"
     t.text    "caption"
     t.integer "showcase_id"
-    t.string  "display_type"
   end
-
-  add_index "sections", ["display_type"], name: "index_sections_on_display_type", using: :btree
 
   create_table "showcases", force: true do |t|
     t.text     "title"

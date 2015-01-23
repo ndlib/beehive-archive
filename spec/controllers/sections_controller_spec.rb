@@ -4,7 +4,7 @@ RSpec.describe SectionsController, :type => :controller do
   let(:current_user) { double(User) }
 
   let(:exhibit) { double(Exhibit, id: 1, showcases: showcases) }
-  let(:section) { double(Section, id: 1, "attributes=" => true, showcase: showcase, save: true, destroy: true) }
+  let(:section) { double(Section, id: 1, "attributes=" => true, showcase: showcase, save: true, destroy: true, order: 1, "order=" => true) }
   let(:sections) { double(find: true, build: true, order: true )}
   let(:showcase) { double(Showcase, id: 1, sections: sections, exhibit: exhibit) }
   let(:showcases) { double(find: true)}
@@ -13,6 +13,8 @@ RSpec.describe SectionsController, :type => :controller do
   before(:each) do
     sign_in(current_user)
 
+    allow(Showcase).to receive(:find).and_return(showcase)
+    allow(Section).to receive(:find).and_return(section)
     allow(Exhibit).to receive(:find).and_return(exhibit)
     allow(showcases).to receive(:find).and_return(showcase)
     allow(sections).to receive(:find).and_return(section)
@@ -36,13 +38,14 @@ RSpec.describe SectionsController, :type => :controller do
   end
 
   describe "new" do
-    subject { get :new, exhibit_id: 20, showcase_id: "10" }
+    subject { get :new, exhibit_id: 20, showcase_id: "10", section: { order: 1 } }
 
 
     it "sets the correct instance varible" do
+      expect(SectionForm).to receive(:build_from_params)
       subject
 
-      expect(assigns(:section)).to eq(section)
+      assigns(:section_form)
     end
 
     it "returns success for html request" do
@@ -102,11 +105,11 @@ RSpec.describe SectionsController, :type => :controller do
     subject { get :edit, id: 10, exhibit_id: 20, showcase_id: "30" }
 
     it "sets the correct instance varible" do
-      expect(sections).to receive(:find).with("10").and_return(section)
+      expect(SectionForm).to receive(:build_from_params)
 
       subject
 
-      expect(assigns(:section)).to eq(section)
+      assigns(:section_form)
     end
 
     it "returns success for html request" do
