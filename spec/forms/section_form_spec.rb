@@ -4,7 +4,7 @@ require 'rails_helper'
 describe SectionForm do
   let(:exhibit) { double(Exhibit, id: 1) }
   let(:showcase) { double(Showcase, id: 1, exhibit: exhibit, sections: sections) }
-  let(:section) {double(Section, id: 1, order: 1, item_id: 1, showcase: showcase, "order=" => true) }
+  let(:section) {double(Section, id: 1, order: 1, item_id: 1, showcase: showcase, "order=" => true, title: "the section") }
   let(:sections) { double( build: true )}
 
   subject { described_class.new(section)}
@@ -41,6 +41,13 @@ describe SectionForm do
     it "raises an error for an incorrect section" do
       subject.stub(:section_type).and_return("dsfasfasfasafafds")
       expect { subject.form_partial }.to raise_error
+    end
+  end
+
+
+  describe "#title" do
+    it "returns the title of the section" do
+      expect(subject.title).to eq("the section")
     end
   end
 
