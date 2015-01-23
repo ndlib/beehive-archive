@@ -9,7 +9,7 @@ class SectionsController < ApplicationController
   end
 
   def new
-    @section = showcase.sections.build
+    @section_form = SectionForm.build_from_params(self)
   end
 
   def create
@@ -27,7 +27,7 @@ class SectionsController < ApplicationController
   end
 
   def edit
-    @section = showcase.sections.find(params[:id])
+    @section_form = SectionForm.build_from_params(self)
   end
 
   def update

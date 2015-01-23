@@ -7,7 +7,7 @@ var NewSectionDropzone = React.createClass({
     };
   },
   classes: function() {
-    return ['section-spacer', this.active() ? 'active' : void 0, this.state.hover ? 'hover' : void 0].join(' ');
+    return ['section-spacer', this.active() ? 'active' : void 0, this.state.hover ? 'hover active' : void 0].join(' ');
   },
   onMouseEnter: function() {
     return this.setState({
@@ -28,10 +28,17 @@ var NewSectionDropzone = React.createClass({
     }
   },
   render: function() {
+    url = "sections/new?section[order]=" + this.props.new_index
     return (
       <div className={this.classes()} onMouseEnter={this.onMouseEnter} onMouseLeave={this.onMouseLeave} onMouseUp={this.onDrop}>
         <div className="section-spacer-inner">
-          <div className="section-spacer-content">Create New Section HERE!!</div>
+          <div className="section-spacer-content">
+            <h3>Add New Section</h3>
+            <p>
+              Drag a saved item or
+              <a href={url}><strong>Add Text</strong></a>
+            </p>
+          </div>
         </div>
      </div>);
   }
