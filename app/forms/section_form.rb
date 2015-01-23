@@ -5,7 +5,8 @@ class SectionForm
     if controller.params[:id]
       section = Section.find(controller.params[:id])
     else
-      section = Showcase.find(controller.params[:showcase_id]).sections.build
+      showcase = Showcase.find(controller.params[:showcase_id])
+      section = showcase.sections.build
       section.order = controller.params[:section][:order]
     end
 
