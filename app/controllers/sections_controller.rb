@@ -9,7 +9,7 @@ class SectionsController < ApplicationController
   end
 
   def new
-    @section = showcase.sections.build
+    @section_form = SectionForm.build_from_params(self)
   end
 
   def create
@@ -27,7 +27,7 @@ class SectionsController < ApplicationController
   end
 
   def edit
-    @section = showcase.sections.find(params[:id])
+    @section_form = SectionForm.build_from_params(self)
   end
 
   def update
@@ -60,7 +60,7 @@ class SectionsController < ApplicationController
   protected
 
     def section_params
-      params.require(:section).permit(:title, :image, :item_id, :description, :order, :caption)
+      params.require(:section).permit(:title, :image, :item_id, :description, :order, :caption, :display_type)
     end
 
     def exhibit
