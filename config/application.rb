@@ -13,7 +13,7 @@ module ExhibitAdmin
     config.autoload_paths += [ Rails.root.join('app', 'services').to_s ]
     config.autoload_paths +=  [ Rails.root.join('app', 'queries').to_s]
     config.autoload_paths += [ Rails.root.join('app', 'decorators').to_s ]
-
+    config.autoload_paths += [ Rails.root.join('app', 'forms').to_s ]
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
