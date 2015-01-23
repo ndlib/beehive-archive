@@ -2,10 +2,12 @@ class SectionForm
   attr_reader :section
 
   def self.build_from_params(controller)
+    controller.params.require(:section).permit(:title, :image, :item_id, :description, :order, :caption, :display_type)
     if controller.params[:id]
       section = Section.find(controller.params[:id])
     else
-      section = Showcase.find(controller.params[:showcase_id]).sections.build( (controller.params[:section] || {}) )
+      section = Showcase.find(controller.params[:showcase_id]).sections.build
+      section.order = controller.params[:section][:order]
       section.display_type = 'text'
     end
 

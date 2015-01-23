@@ -1,0 +1,7 @@
+<h1>Edit <%= h @section_form.title %></h1>
+
+<%= simple_form_for @section_form.form_url do | f | %>
+
+  <%= render partial: @section_form.form_partial, locals: { f: f } %>
+
+<% end %>
