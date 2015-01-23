@@ -2,13 +2,11 @@ class SectionForm
   attr_reader :section
 
   def self.build_from_params(controller)
-    controller.params.require(:section).permit(:title, :image, :item_id, :description, :order, :caption, :display_type)
     if controller.params[:id]
       section = Section.find(controller.params[:id])
     else
       section = Showcase.find(controller.params[:showcase_id]).sections.build
       section.order = controller.params[:section][:order]
-      section.display_type = 'text'
     end
 
     new(section)
@@ -24,15 +22,14 @@ class SectionForm
   end
 
   def form_partial
-    if section.display_type == 'image'
+    if section_type == 'image'
       'image_form'
-    elsif section.display_type == 'text'
+    elsif section_type == 'text'
       'text_form'
     else
       raise "Implment section form for type #{section.display_type}"
     end
   end
-
 
   def title
     section.title
@@ -40,13 +37,14 @@ class SectionForm
 
   private
 
-      def validate!
-        if section.order.blank?
-          raise "Section passed to section form requires an order "
-        end
-        if section.display_type.blank?
-          raise "Section passed to SectionForm requires a display_type"
-        end
+    def section_type
+      @type ||= SectionType.new(section).type
+    end
+
+    def validate!
+      if section.order.blank?
+        raise "Section passed to section form requires an order "
       end
+    end
 
 end
