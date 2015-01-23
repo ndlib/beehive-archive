@@ -14,7 +14,7 @@ class SaveSection
     section.attributes = params
 
     current_order
-    if section.save &&  fix_order!
+    if section.save && fix_order!
       section
     else
       false

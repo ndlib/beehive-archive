@@ -6,5 +6,6 @@ json.set! :sections do
     json.image section.image
     json.caption section.caption
     json.order section.order
+    json.display_type SectionType.new(section).type
   end
 end
