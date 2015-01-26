@@ -1,1 +1,7 @@
 <%= render partial: 'form' %>
+
+<%= Waggle::DeleteSection.new(@showcase).display do | ds |
+  ds.path = [@showcase.exhibit, @showcase]
+  ds.message = "Procede with caution. This will remove the Showcase and all sections completely."
+end
+%>
