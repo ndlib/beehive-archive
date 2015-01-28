@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap-sprockets
+//= require underscore
 //= require showdown
 //= require redactor
 //= require redactor_field

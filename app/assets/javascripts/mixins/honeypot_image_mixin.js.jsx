@@ -10,20 +10,12 @@ var HoneypotImageMixin = {
       style: 'original'
     };
   },
-  path: function () {
-    return "/images/" + this.style().path
-  },
-  uri: function() {
-    return this.base_uri() + this.path();
-  },
-  base_uri: function() {
-    if (this.props.honeypot_image.host == 'localhost') {
-      return "http://localhost:3019";
-    } else {
-      return window.location.protocol + "//" + this.props.honeypot_image.host;
-    }
+  src: function() {
+    return this.style().src;
   },
   style: function() {
-    return this.props.honeypot_image.styles[this.props.style];
+    return _.find(this.props.honeypot_image.links.styles, function(style) {
+      return style.id == this.props.style;
+    }, this);
   }
 };
