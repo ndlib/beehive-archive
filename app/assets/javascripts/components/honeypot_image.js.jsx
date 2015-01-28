@@ -3,6 +3,6 @@
 var HoneypotImage = React.createClass({
   mixins: [HoneypotImageMixin],
   render: function() {
-    return (<img src={this.uri()} />)
+    return (<img src={this.src()} />)
   },
 });
