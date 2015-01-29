@@ -22,3 +22,5 @@
 en:
   showcases:
     new: "New Showcase"
+    show:
+      sections: "Edit sections"

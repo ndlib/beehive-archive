@@ -4,7 +4,7 @@
 
     <p><%= link_to "Add Intro" %> </p>
 
-    <%= f.input :description, as: :text %>
+    <%= f.input :description, as: :text, input_html: {class: 'redactor-field'} %>
 
     <%= f.hidden_field :display_type, value: 'text'%>
     <%= f.hidden_field :order %>

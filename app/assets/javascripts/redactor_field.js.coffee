@@ -9,9 +9,11 @@ window.RedactorPlugins.bufferbuttons = ->
 
 
 jQuery ->
-  $('#section_description').redactor(
+  $('.redactor-field').each ->
+    element = $(this)
+    element.redactor(
       buttonSource: true
       plugins: ['bufferbuttons']
-      placeholder: 'Add Text Describing the image'
+      placeholder: element.attr('placeholder')
       minHeight: 300
     )

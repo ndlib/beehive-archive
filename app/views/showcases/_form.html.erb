@@ -2,6 +2,7 @@
   <%# display_errors(@exhibit) %>
 
   <%= f.input :title, as: :string %>
+  <%= f.input :description, as: :text, input_html: {class: 'redactor-field'} %>
   <%= f.button :submit, :class => 'btn-primary', value: "Save" %>
   <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
                 exhibit_showcases_path(@showcase.exhibit), :class => 'btn btn-default' %>
