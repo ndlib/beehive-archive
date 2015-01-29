@@ -145,6 +145,11 @@
   cursor: grab;
 }
 
+.section .drag {
+  width: 100px;
+  height: 150px;
+}
+
 .drag.dragging {
   z-index: 1;
   pointer-events: none;
