@@ -9,6 +9,7 @@ var ShowcaseEditor = React.createClass({
   getInitialState: function() {
     return {
       currentDragItem: null,
+      currentDragType: null,
       sections: []
     };
   },
@@ -59,18 +60,33 @@ var ShowcaseEditor = React.createClass({
       });
     });
   },
-  onDragStart: function(details) {
+  handleSectionReorder: function (section, index) {
+    sections = this.state.sections;
+    // move the item
+    //    this.splice(to, 0, this.splice(from, 1)[0]);
+    sections.splice(index, 0, sections.splice(section.order, 1)[0]);
+    this.setState({
+      sections: sections
+    });
+  },
+  onDragStart: function(details, drag_type) {
     return this.setState({
-      currentDragItem: details
+      currentDragItem: details,
+      currentDragType: drag_type
     });
   },
   onDragStop: function() {
     return this.setState({
-      currentDragItem: null
+      currentDragItem: null,
+      currentDragType: null
     });
   },
   onDrop: function(target, index) {
-    this.handleItemDrop(target, index);
+    if (this.state.currentDragType == 'new_item') {
+      this.handleItemDrop(target, index);
+    } else if (this.state.currentDragType =='reorder') {
+      this.handleSectionReorder(target, index)
+    }
     return this.setState({
       lastDrop: {
         source: this.state.currentDragItem,
@@ -95,7 +111,7 @@ var ShowcaseEditor = React.createClass({
     <div className={this.divclassname}>
       <h2>Sections</h2>
       <div className="sections-content">
-        <SectionList sections={this.state.sections} onSectionClick={this.sectionClick} currentDragItem={this.state.currentDragItem} onDrop={this.onDrop} />
+        <SectionList sections={this.state.sections} onSectionClick={this.sectionClick} currentDragItem={this.state.currentDragItem} onDrop={this.onDrop} onDragStart={this.onDragStart} onDragStop={this.onDragStop}  />
       </div>
       <div className="add-items-content">
         <AddItemsBar onDragStart={this.onDragStart} onDragStop={this.onDragStop} itemsJSONPath={this.props.itemsJSONPath} />
