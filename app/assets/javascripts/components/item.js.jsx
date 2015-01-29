@@ -50,7 +50,7 @@ Item = React.createClass({
       this.setState({
         dragging: true
       });
-      this.props.onDragStart(this.props.item);
+      this.props.onDragStart(this.props.item, 'new_item');
     }
     if (this.state.dragging) {
       return this.setState({
