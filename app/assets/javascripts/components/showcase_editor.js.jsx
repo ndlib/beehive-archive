@@ -66,7 +66,9 @@ var ShowcaseEditor = React.createClass({
     sections = this.state.sections;
     // move the item
     //    this.splice(to, 0, this.splice(from, 1)[0]);
+    console.log(sections);
     sections.splice(index, 0, sections.splice(section.order, 1)[0]);
+    console.log(sections);
     this.setState({
       sections: sections
     });
