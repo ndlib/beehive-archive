@@ -48,6 +48,9 @@ gem 'paperclip'
 
 gem 'draper'
 
+gem 'faraday'
+gem 'faraday_middleware'
+
 group :development, :test do
   gem "pry"
   gem "rspec-rails"

@@ -1,25 +1,22 @@
 class ItemsController < ApplicationController
+  helper_method :exhibit
+
   def index
-    @exhibit = Exhibit.find(params[:exhibit_id])
 
     respond_to do |format|
-      format.json { render json: remote_json(@exhibit.items_json_url) }
+      format.json { render json: ExhibitItemsJsonFormatter.new(exhibit) }
     end
   end
 
   def show
-    @exhibit = Exhibit.find(params[:exhibit_id])
-
     respond_to do |format|
-      format.json { render json: remote_json(@exhibit.item_json_url(params[:id])) }
+      format.json { render json: ExhibitItemJsonFormatter.new(exhibit, params[:id]) }
     end
   end
 
   private
-
-    def remote_json(url)
-      require 'open-uri'
-      open(url) {|io| io.read}
+    def exhibit
+      @exhibit ||= Exhibit.find(params[:exhibit_id])
     end
 
 end

@@ -346,6 +346,8 @@ DEPENDENCIES
   devise_cas_authenticatable
   draper
   faker
+  faraday
+  faraday_middleware
   growl
   growl-rspec
   guard (~> 2.7.3)
