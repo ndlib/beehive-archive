@@ -12,21 +12,28 @@ AddItemsBar = React.createClass({
     };
   },
   loadItemsFromServer: function() {
-    $.ajax({
-      url: this.props.itemsJSONPath,
-      dataType: "json",
-      success: (function(data) {
-        itemList = new beehive.HoneycombItemList()
-        itemList.loadData(data)
-        console.log(itemList.items)
-        this.setState({
-          items: data.items
-        });
-      }).bind(this),
-      error: (function(xhr, status, err) {
-        console.error(this.props.url, status, err.toString());
-      }).bind(this)
-    });
+    itemList = new beehive.HoneycombItemList(2);
+    // console.log(itemList.load());
+    itemList.load().done((function(list) {
+      this.setState({
+        items: list.data.items
+      });
+    }).bind(this));
+    // $.ajax({
+    //   url: this.props.itemsJSONPath,
+    //   dataType: "json",
+    //   success: (function(data) {
+    //     itemList = new beehive.HoneycombItemList()
+    //     itemList.loadData(data)
+    //     console.log(itemList.items)
+    //     this.setState({
+    //       items: data.items
+    //     });
+    //   }).bind(this),
+    //   error: (function(xhr, status, err) {
+    //     console.error(this.props.url, status, err.toString());
+    //   }).bind(this)
+    // });
   },
   componentDidMount: function() {
     this.loadItemsFromServer()

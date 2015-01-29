@@ -10,12 +10,21 @@ class beehive.BeehiveObjectList extends beehive.Module
     @objectsByID = {}
     @loaded = false
 
-  load: (callback) ->
+  load: () ->
     _this = @
-    $.getJSON(@loadURL())
-      .success (data) ->
-        _this.loadSuccess(data)
-        callback()
+    if !@loading
+      @deferred = new jQuery.Deferred()
+      @loading = true
+      $.getJSON(@loadURL())
+        .done (data) ->
+          _this.loadSuccess(data)
+          _this.deferred.resolve(_this)
+        .fail (xhr, status, err) ->
+          console.error(xhr, status, err.toString());
+          _this.deferred.reject(xhr, status, err)
+        .always ->
+          _this.loading = false
+    @deferred.promise()
 
   loadSuccess: (data) ->
     @loadData(data)
