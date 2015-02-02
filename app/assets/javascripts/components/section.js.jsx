@@ -37,13 +37,15 @@ var Section = React.createClass({
       event.preventDefault();
       this.addEvents();
       pageOffset = this.getDOMNode().getBoundingClientRect();
-      return this.setState({
-        mouseDown: true,
-        viewportOriginX: event.pageX - document.body.scrollLeft,
-        viewportOriginY: event.pageY - document.body.scrollTop,
-        elementX: event.pageX - document.body.scrollLeft - 50,
-        elementY: event.pageY - document.body.scrollTop - 75
-      });
+      if (!this.state.mouseDown) {
+        return this.setState({
+          mouseDown: true,
+          viewportOriginX: event.pageX - document.body.scrollLeft,
+          viewportOriginY: event.pageY - document.body.scrollTop,
+          elementX: event.pageX - document.body.scrollLeft - 50,
+          elementY: event.pageY - document.body.scrollTop - 75
+        });
+      }
     }
   },
   onMouseMove: function(event) {
@@ -58,6 +60,11 @@ var Section = React.createClass({
       this.props.onDragStart(this.props.section, 'reorder');
     }
     if (this.state.dragging) {
+      // e = $('#section-content-editor');
+      //e.scroll(e.scrollLeft() + 50);
+      //e.scrollLeft(e.scrollLeft() + 50)
+      //console.log(event.pageY);
+
       return this.setState({
         left: this.state.elementX + deltaX,
         top: this.state.elementY + deltaY
@@ -69,7 +76,8 @@ var Section = React.createClass({
     if (this.state.dragging) {
       this.props.onDragStop();
       return this.setState({
-        dragging: false
+        dragging: false,
+        mouseDown: false
       });
     }
   },

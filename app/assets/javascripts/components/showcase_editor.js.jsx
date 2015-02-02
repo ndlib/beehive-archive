@@ -34,6 +34,7 @@ var ShowcaseEditor = React.createClass({
       return style.id == 'medium';
     }, this);
     image = style.src;
+
     section = {
       id: 'new',
       title: item.title,
@@ -66,6 +67,7 @@ var ShowcaseEditor = React.createClass({
     sections = this.state.sections;
     // move the item
     //    this.splice(to, 0, this.splice(from, 1)[0]);
+    console.log(index);
     console.log(sections);
     sections.splice(index, 0, sections.splice(section.order, 1)[0]);
     console.log(sections);
@@ -98,6 +100,10 @@ var ShowcaseEditor = React.createClass({
       }
     });
   },
+  onDragOver: function(event) {
+    console.log(event.pageX);
+    console.log(event.pageY);
+  },
   componentDidMount: function() {
     this.loadSectionsFromServer();
     setInterval(this.loadSectionsFromServer(), 8000);
@@ -114,8 +120,8 @@ var ShowcaseEditor = React.createClass({
     return (
     <div className={this.divclassname}>
       <h2>Sections</h2>
-      <div className="sections-content">
-        <SectionList sections={this.state.sections} onSectionClick={this.sectionClick} currentDragItem={this.state.currentDragItem} onDrop={this.onDrop} onDragStart={this.onDragStart} onDragStop={this.onDragStop}  />
+      <div id="section-content-editor" className="sections-content"  onMouseOver={this.onDragOver}>
+        <SectionList sections={this.state.sections} onSectionClick={this.sectionClick} currentDragItem={this.state.currentDragItem} onDrop={this.onDrop} onDragStart={this.onDragStart} onDragStop={this.onDragStop} />
       </div>
       <div className="add-items-content">
         <AddItemsBar onDragStart={this.onDragStart} onDragStop={this.onDragStop} itemsJSONPath={this.props.itemsJSONPath} />

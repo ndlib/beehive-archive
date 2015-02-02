@@ -17,5 +17,5 @@ var HoneypotImageMixin = {
     return _.find(this.props.honeypot_image.links.styles, function(style) {
       return style.id == this.props.style;
     }, this);
-  }
+  },
 };
