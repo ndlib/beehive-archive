@@ -140,7 +140,7 @@ var ShowcaseEditor = React.createClass({
   },
   componentDidMount: function() {
     this.loadSectionsFromServer();
-    setInterval(this.loadSectionsFromServer, 8000);
+    setTimeout(this.loadSectionsFromServer, 8000);
   },
   sectionClick: function(section) {
     window.location = "" + this.props.sectionsPath + "/" + section.id + "/edit";
