@@ -1,4 +1,5 @@
 class ExhibitsController < ApplicationController
+  skip_before_filter :redirect_to_sign_in, only: [:show]
 
   def index
     @exhibits = ExhibitQuery.new.all_for_user(current_user)
