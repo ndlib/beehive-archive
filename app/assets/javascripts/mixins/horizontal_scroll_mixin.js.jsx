@@ -5,7 +5,7 @@ var HorizontalScrollMixin = {
     this.element = document.getElementById(element);
   },
 
-  setScroll: function(element, speed) {
+  setHorizontalScrollOnElement: function(element, speed) {
     this.setElement(element);
 
     if (this.checkScrollRight()) {
