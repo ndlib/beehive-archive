@@ -1,6 +1,7 @@
 /** @jsx React.DOM */
 
 var ShowcaseEditor = React.createClass({
+  mixins: [HorizontalScrollMixin],
   propTypes: {
     sectionsJSONPath: React.PropTypes.string.isRequired,
     sectionsPath: React.PropTypes.string.isRequired,
@@ -66,10 +67,6 @@ var ShowcaseEditor = React.createClass({
   },
   handleSectionReorder: function (section, index) {
     sections = this.state.sections;
-    // move the item
-    //    this.splice(to, 0, this.splice(from, 1)[0]);
-    //console.log(index);
-    //console.log(sections);
     sections.splice(index, 0, sections.splice(section.order, 1)[0]);
     //console.log(sections);
     this.setState({
@@ -102,41 +99,14 @@ var ShowcaseEditor = React.createClass({
     });
   },
   onMouseMove: function(event) {
-    //console.log(this.element().getBoundingClientRect());
-    console.log(event.pageX);
-    //console.log(event.pageY);
-    //console.log(event.pageX > 1100 && !this.state.scroll);
     if (!this.state.currentDragItem) {
       if (this.state.scroll) {
         this.setState( { scroll: false } );
       }
       return
     }
+    this.setScroll();
 
-    if (event.pageX > this.box_right() && !this.state.scroll) {
-      this.setState( { scroll: true });
-      setTimeout(this.scroll, 50, 40);
-    } else if (event.pageX < this.box_left() && !this.state.scroll) {
-      this.setState( { scroll: true });
-      setTimeout(this.scroll, 50, -40);
-    } else if (event.pageX <= this.box_right() && event.pageX >= this.box_left() && this.state.scroll) {
-      this.setState( { scroll: false } );
-    }
-  },
-  scroll: function(speed) {
-    if (this.state.scroll) {
-      this.element().scrollLeft  += speed;
-      setTimeout(this.scroll, 100, speed);
-    }
-  },
-  element: function() {
-    return document.getElementById('section-content-editor');
-  },
-  box_right: function() {
-    return this.element().getBoundingClientRect().right - 100;
-  },
-  box_left: function() {
-    return this.element().getBoundingClientRect().left + 100;
   },
   componentDidMount: function() {
     this.loadSectionsFromServer();
