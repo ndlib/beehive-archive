@@ -105,7 +105,7 @@ var ShowcaseEditor = React.createClass({
       }
       return
     }
-    this.setScroll();
+    this.setScroll('section-content-editor', 40);
 
   },
   componentDidMount: function() {
