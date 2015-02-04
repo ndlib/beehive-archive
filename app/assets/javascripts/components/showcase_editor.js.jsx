@@ -1,30 +1,12 @@
 /** @jsx React.DOM */
 
 var ShowcaseEditor = React.createClass({
+  mixins: [ JsonLdMixin, SectionMixin ],
+
   propTypes: {
     sectionsJSONPath: React.PropTypes.string.isRequired,
     sectionsPath: React.PropTypes.string.isRequired,
     itemsJSONPath: React.PropTypes.string.isRequired
-  },
-  getInitialState: function() {
-    return {
-      currentDragItem: null,
-      sections: []
-    };
-  },
-  loadSectionsFromServer: function() {
-    $.ajax({
-      url: this.props.sectionsJSONPath,
-      dataType: "json",
-      success: (function(data) {
-        this.setState({
-          sections: data.sections
-        });
-      }).bind(this),
-      error: (function(xhr, status, err) {
-        console.error(this.props.url, status, err.toString());
-      }).bind(this)
-    });
   },
   handleItemDrop: function(item, index) {
     var image, section, sections, style_path, honeypot_image;
@@ -81,8 +63,7 @@ var ShowcaseEditor = React.createClass({
     });
   },
   componentDidMount: function() {
-    this.loadSectionsFromServer();
-    setInterval(this.loadSectionsFromServer(), 8000);
+    this.loadSections(this.props.sectionsJSONPath);
   },
   sectionClick: function(section) {
     window.location = "" + this.props.sectionsPath + "/" + section.id + "/edit";

@@ -69,6 +69,8 @@ RSpec.describe SectionsController, :type => :controller do
       expect(subject).to be_success
       expect(subject).to render_template(:show)
     end
+
+    it "returns a successful json request"
   end
 
 
