@@ -1,11 +1,10 @@
-<div class="page-header">
-  <div class="pull-right">
-    <%= link_to t('.edit', :default => t("helpers.links.edit")),
-      edit_exhibit_showcase_path(@exhibit, @showcase), :class => 'btn btn-default' %>
-  </div>
+<%= showcase_title(@showcase) %>
 
-  <h1 class="ui-header"><%= @exhibit.title %> > <%= @showcase.title %></h1>
+<div class="pull-right">
+  <%= link_to t('.edit', :default => t("helpers.links.edit")),
+    edit_exhibit_showcase_path(@exhibit, @showcase), :class => 'btn btn-default' %>
 </div>
+
 
 <div class="row">
   <div class="col-md-12">
