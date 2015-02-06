@@ -1,14 +1,12 @@
-<h1>Edit <%= h @section_form.title %></h1>
-
 <%= react_component('SectionForm', { url: url_for(@section_form.form_url) + '.json' }) %>
 
-<%= simple_form_for @section_form.form_url do | f | %>
+  <%= simple_form_for @section_form.form_url do | f | %>
 
-  <%= render partial: @section_form.form_partial, locals: { f: f } %>
+    <%= render partial: @section_form.form_partial, locals: { f: f } %>
 
-<% end %>
+  <% end %>
 
-<%= Waggle::DeleteSection.new(@section_form.section).display do | ds |
-  ds.path = @section_form.form_url
-end
+  <%= Waggle::DeleteSection.new(@section_form.section).display do | ds |
+    ds.path = @section_form.form_url
+  end
 %>

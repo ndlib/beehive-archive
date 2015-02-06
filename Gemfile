@@ -41,6 +41,11 @@ gem 'newrelic_rpm'
 
 gem 'react-rails', '~> 1.0.0.pre', github: 'reactjs/react-rails'
 
+source 'https://rails-assets.org' do
+  gem 'rails-assets-react-forms'
+end
+
+
 gem 'showdown-rails'
 
 gem 'simple_form', '~> 3.1.0rc1'

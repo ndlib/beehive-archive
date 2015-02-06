@@ -12,8 +12,13 @@
 //
 //= require underscore
 //= require showdown
-//= require redactor
-//= require redactor_field
 //= require react
 //= require react_ujs
+//= require react-forms
 //= require components
+
+
+var Schema = ReactForms.schema.Schema
+var Property = ReactForms.schema.Property
+var Form = ReactForms.Form
+

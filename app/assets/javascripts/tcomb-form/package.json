@@ -1,0 +1,80 @@
+{
+  "name": "tcomb-form",
+  "version": "0.4.0",
+  "description": "React.js powered UI library for developing forms writing less code",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Open test/index.html in a browser...\" && watchify -t reactify test/index.js -o test/tests.js -v -x react"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gcanti/tcomb-form.git"
+  },
+  "author": {
+    "name": "Giulio Canti",
+    "email": "giulio.canti@gmail.com"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/gcanti/tcomb-form/issues"
+  },
+  "homepage": "https://github.com/gcanti/tcomb-form",
+  "peerDependencies": {
+    "react": ">=0.12.0"
+  },
+  "dependencies": {
+    "debug": "^2.1.1",
+    "tcomb-validation": "^0.3.0",
+    "uvdom": "^0.1.0",
+    "uvdom-bootstrap": "^0.1.2"
+  },
+  "devDependencies": {
+    "browserify": "^6.3.2",
+    "deep-diff": "^0.3.0",
+    "gulp": "^3.8.10",
+    "gulp-jshint": "^1.9.0",
+    "gulp-util": "^3.0.2",
+    "jshint-stylish": "^1.0.0",
+    "react-vdom": "^0.2.1",
+    "reactify": "^1.0.0",
+    "tape": "^3.0.3",
+    "vinyl-source-stream": "^1.0.0",
+    "watchify": "^2.2.1"
+  },
+  "tags": [
+    "form",
+    "validation",
+    "generation",
+    "react",
+    "react-component"
+  ],
+  "keywords": [
+    "form",
+    "validation",
+    "generation",
+    "react",
+    "react-component"
+  ],
+  "gitHead": "aef5b61f2915043925b428e396e345fa772c0b83",
+  "_id": "tcomb-form@0.4.0",
+  "_shasum": "f143f0e029bcae20d1e82a2f36f7f8121f5be3fc",
+  "_from": "tcomb-form@",
+  "_npmVersion": "1.4.28",
+  "_npmUser": {
+    "name": "gcanti",
+    "email": "giulio.canti@gmail.com"
+  },
+  "maintainers": [
+    {
+      "name": "gcanti",
+      "email": "giulio.canti@gmail.com"
+    }
+  ],
+  "dist": {
+    "shasum": "f143f0e029bcae20d1e82a2f36f7f8121f5be3fc",
+    "tarball": "http://registry.npmjs.org/tcomb-form/-/tcomb-form-0.4.0.tgz"
+  },
+  "directories": {},
+  "_resolved": "https://registry.npmjs.org/tcomb-form/-/tcomb-form-0.4.0.tgz",
+  "readme": "ERROR: No README data found!"
+}
