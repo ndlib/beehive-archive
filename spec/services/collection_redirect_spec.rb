@@ -9,14 +9,14 @@ describe CollectionRedirect do
 
     it "redirects to the exhibit" do
       expect(Exhibit).to receive("find_by").with({collection_id: 1}).and_return(:exhibit)
-      subject
+      expect(subject).to eq("/exhibits/exhibit")
     end
   end
 
   context "collection does not have an exhibit" do
     it "redirects to new collection page with collection id set" do
       expect(Exhibit).to receive("find_by").with({collection_id: 1}).and_return(nil)
-      subject
+      expect(subject).to eq("/exhibits/new?collection_id=1")
     end
   end
 
