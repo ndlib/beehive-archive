@@ -12,15 +12,12 @@
   <thead>
     <tr>
       <th><%= model_class.human_attribute_name(:title) %></th>
-      <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
   <tbody>
     <% @exhibits.each do |exhibit| %>
       <tr>
-        <td><%= link_to exhibit.title, exhibit_path(exhibit) %></td>
-        <td>
-        </td>
+        <td><%= link_to exhibit.title, exhibit_showcases_path(exhibit) %></td>
       </tr>
     <% end %>
   </tbody>
