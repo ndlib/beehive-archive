@@ -46,6 +46,7 @@ var Section = React.createClass({
           elementY: event.pageY - document.body.scrollTop - 75
         });
       }
+
     }
   },
   onMouseMove: function(event) {
@@ -60,11 +61,6 @@ var Section = React.createClass({
       this.props.onDragStart(this.props.section, 'reorder');
     }
     if (this.state.dragging) {
-      // e = $('#section-content-editor');
-      //e.scroll(e.scrollLeft() + 50);
-      //e.scrollLeft(e.scrollLeft() + 50)
-      //console.log(event.pageY);
-
       return this.setState({
         left: this.state.elementX + deltaX,
         top: this.state.elementY + deltaY
