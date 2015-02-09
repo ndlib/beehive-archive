@@ -145,10 +145,6 @@ GEM
       faraday (>= 0.7.4, < 0.10)
     ffi (1.9.6)
     formatador (0.2.5)
-    growl (1.0.3)
-    growl-rspec (3.0.0)
-      growl
-      rspec (~> 3.0)
     guard (2.7.3)
       formatador (>= 0.2.4)
       listen (~> 2.7)
@@ -267,7 +263,6 @@ GEM
       rspec-mocks (~> 3.1.0)
       rspec-support (~> 3.1.0)
     rspec-support (3.1.2)
-    ruby_gntp (0.3.4)
     rubycas-client (2.3.9)
       activesupport
     sass (3.2.19)
@@ -346,8 +341,6 @@ DEPENDENCIES
   devise_cas_authenticatable
   draper
   faker
-  growl
-  growl-rspec
   guard (~> 2.7.3)
   guard-bundler
   guard-coffeescript
@@ -367,7 +360,6 @@ DEPENDENCIES
   react-rails (~> 1.0.0.pre)!
   rspec-collection_matchers
   rspec-rails
-  ruby_gntp
   sass-rails (~> 4.0.3)
   sdoc (~> 0.4.0)
   showdown-rails
