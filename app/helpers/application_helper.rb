@@ -1,5 +1,9 @@
 module ApplicationHelper
 
+  def exhibit_nav(exhibit, active)
+    Waggle::SideNav.new(exhibit).display(active)
+  end
+
   def showcase_title(showcase)
     page_title(showcase.exhibit.title, showcase.title, exhibit_path(showcase.exhibit))
   end
