@@ -23,13 +23,13 @@ var SectionList = React.createClass({
   },
   section_tag: function(section) {
     var key = section.id + '-' + section.order
-    return (<Section section={section} key={key} onSectionClick={this.props.onSectionClick} />)
+    return (<Section  onDragStart={this.props.onDragStart} onDragStop={this.props.onDragStop} section={section} key={key} onSectionClick={this.props.onSectionClick} />)
   },
   dropzone_tag: function(order) {
     var  key = "spacer-" + order;
-    return (<NewSectionDropzone key={key} currentDragItem={this.props.currentDragItem} onDrop={this.props.onDrop} new_index= {order + 1} />);
+    return (<NewSectionDropzone key={key} currentDragItem={this.props.currentDragItem} onDrop={this.props.onDrop} new_index={order + 1} />);
   },
   render: function() {
-    return (<div className="sections-content-inner">{this.sectionRows()}</div>);
+    return (<div id="sections-content-inner" className="sections-content-inner">{this.sectionRows()}</div>);
   }
 });

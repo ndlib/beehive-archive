@@ -1,6 +1,7 @@
 /** @jsx React.DOM */
 
 var ShowcaseEditor = React.createClass({
+  mixins: [HorizontalScrollMixin],
   propTypes: {
     sectionsJSONPath: React.PropTypes.string.isRequired,
     sectionsPath: React.PropTypes.string.isRequired,
@@ -9,7 +10,9 @@ var ShowcaseEditor = React.createClass({
   getInitialState: function() {
     return {
       currentDragItem: null,
-      sections: []
+      currentDragType: null,
+      sections: [],
+      scroll: false
     };
   },
   loadSectionsFromServer: function() {
@@ -33,6 +36,7 @@ var ShowcaseEditor = React.createClass({
       return style.id == 'medium';
     }, this);
     image = style.src;
+
     section = {
       id: 'new',
       title: item.title,
@@ -61,18 +65,32 @@ var ShowcaseEditor = React.createClass({
       });
     });
   },
-  onDragStart: function(details) {
+  handleSectionReorder: function (section, index) {
+    sections = this.state.sections;
+    sections.splice(index, 0, sections.splice(section.order, 1)[0]);
+    //console.log(sections);
+    this.setState({
+      sections: sections
+    });
+  },
+  onDragStart: function(details, drag_type) {
     return this.setState({
-      currentDragItem: details
+      currentDragItem: details,
+      currentDragType: drag_type
     });
   },
   onDragStop: function() {
     return this.setState({
-      currentDragItem: null
+      currentDragItem: null,
+      currentDragType: null
     });
   },
   onDrop: function(target, index) {
-    this.handleItemDrop(target, index);
+    if (this.state.currentDragType == 'new_item') {
+      this.handleItemDrop(target, index);
+    } else if (this.state.currentDragType =='reorder') {
+      this.handleSectionReorder(target, index)
+    }
     return this.setState({
       lastDrop: {
         source: this.state.currentDragItem,
@@ -80,9 +98,19 @@ var ShowcaseEditor = React.createClass({
       }
     });
   },
+  onMouseMove: function(event) {
+    if (!this.state.currentDragItem) {
+      if (this.state.scroll) {
+        this.setState( { scroll: false } );
+      }
+      return
+    }
+    this.setHorizontalScrollOnElement('section-content-editor', 40);
+
+  },
   componentDidMount: function() {
     this.loadSectionsFromServer();
-    setInterval(this.loadSectionsFromServer(), 8000);
+    setTimeout(this.loadSectionsFromServer, 8000);
   },
   sectionClick: function(section) {
     window.location = "" + this.props.sectionsPath + "/" + section.id + "/edit";
@@ -96,8 +124,8 @@ var ShowcaseEditor = React.createClass({
     return (
     <div className={this.divclassname}>
       <h2>Sections</h2>
-      <div className="sections-content">
-        <SectionList sections={this.state.sections} onSectionClick={this.sectionClick} currentDragItem={this.state.currentDragItem} onDrop={this.onDrop} />
+      <div id="section-content-editor" className="sections-content"  onMouseMove={this.onMouseMove} onMouseOut={this.onMouseOut} >
+        <SectionList sections={this.state.sections} onSectionClick={this.sectionClick} currentDragItem={this.state.currentDragItem} onDrop={this.onDrop} onDragStart={this.onDragStart} onDragStop={this.onDragStop} />
       </div>
       <div className="add-items-content">
         <AddItemsBar onDragStart={this.onDragStart} onDragStop={this.onDragStop} itemsJSONPath={this.props.itemsJSONPath} />
