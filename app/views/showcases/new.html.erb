@@ -1,4 +1,11 @@
+<%= exhibit_title(@exhibit, "New Showcase") %>
 
-<h1>New Showcase</h1>
+<div class="row">
+  <div class="col-md-9">
 
-<%= render partial: 'form' %>
+    <%= render partial: 'form' %>
+  </div>
+  <div class="col-md-3">
+    <%= exhibit_nav(@exhibit, :showcases) %>
+  </div>
+</div>

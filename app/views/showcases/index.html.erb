@@ -1,9 +1,9 @@
-<%= exhibit_title(@exhibit) %>
+<%= exhibit_title(@exhibit, 'Showcases') %>
 
 <div class="row">
   <div class="col-md-9">
     <div class="pull-right">
-      <%= link_to t('.new', :default => t("New Showcase")),
+      <%= link_to t('.new', :default => t("Add Showcase")),
               new_exhibit_showcase_path(),
               :class => 'btn btn-primary' %>
     </div>
@@ -17,7 +17,7 @@
       <tbody>
         <% @showcases.each do |showcase| %>
           <tr>
-            <td><%= link_to showcase.title, exhibit_showcase_path(showcase.exhibit, showcase) %></td>
+            <td><%= link_to showcase.title, exhibit_showcase_sections_path(showcase.exhibit, showcase) %></td>
           </tr>
         <% end %>
       </tbody>
