@@ -9,7 +9,11 @@ class ExhibitsController < ApplicationController
   end
 
   def new
-    @exhibit = Exhibit.new(collection_id: 1)
+    if params[:collection_id]
+      @exhibit = Exhibit.new(collection_id: params[:collection_id])
+    else
+      @exhibit = Exhibit.new(collection_id: 1)
+    end
   end
 
   def create
