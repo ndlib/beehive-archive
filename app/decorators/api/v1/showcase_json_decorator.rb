@@ -16,6 +16,10 @@ module API
       def sections
         h.api_v1_showcase_sections_url(object.id)
       end
+
+      def exhibit
+        h.api_v1_exhibit_url(object.exhibit_id)
+      end
     end
   end
 end

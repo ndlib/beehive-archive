@@ -17,6 +17,10 @@ module API
         "#{Rails.configuration.honeycomb_url}/api/v1/collections/#{collection_id}/items/#{item_id}"
       end
 
+      def showcase
+        h.api_v1_showcase_url(object.showcase_id)
+      end
+
       private
         def item_id
           object.item_id
