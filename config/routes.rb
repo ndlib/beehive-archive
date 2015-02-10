@@ -11,7 +11,17 @@ Rails.application.routes.draw do
     resources :items, only: [:index, :show], defaults: {format: :json}
   end
 
-   resources :collections, only: [:index, :show], controller: 'collection_redirect'
+  resources :collections, only: [:index, :show], controller: 'collection_redirect'
+
+  namespace :api do
+    namespace :v1 do
+      resources :exhibits, only: [:index, :show], defaults: {format: :json} do
+        resources :showcases, only: [:index, :show], defaults: {format: :json} do
+          resources :sections, only: [:index, :show], defaults: {format: :json}
+        end
+      end
+    end
+  end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
