@@ -98,10 +98,17 @@ var Section = React.createClass({
     } else {
       dragclass = "" + dragclass + " hidden";
     }
+    dragContent = "";
+    if (this.props.section.image) {
+      dragContent = (<img src={this.props.section.image} className="small-image-dragging" />);
+    } else {
+      gibberishTextString = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages.";
 
+      dragContent = (<div className="small-text-dragging"><h4>{this.props.section.title}</h4><p>{gibberishTextString}</p></div>);
+    }
     return (
       <div className="section" onMouseDown={this.onMouseDown} >
-        <div className={dragclass} style={this.style()}> DRAG ME !!</div>
+        <div className={dragclass} style={this.style()}>{dragContent}</div>
         <SectionImage section={this.props.section} />
         <SectionDescription section={this.props.section} />
         <div className="section-edit" onClick={this.handleClick}>Edit</div>
