@@ -5,6 +5,18 @@
   overflow: hidden;
 }
 
+@mixin grab() {
+  cursor: -webkit-grab;
+  cursor: -moz-grab;
+  cursor: grab;
+}
+
+@mixin grabbing() {
+  cursor: -webkit-grabbing;
+  cursor: -moz-grabbing;
+  cursor: grabbing;
+}
+
 .sections {
   user-select: none;
   &.dragging * {
@@ -36,6 +48,7 @@
   float: left;
   height: 476px;
   display: inline;
+  @include grab();
 }
 
 .section-container-text {
@@ -107,6 +120,9 @@
   height: 100%;
   width: 40px;
   @include transition();
+  .section-spacer-content {
+    opacity: 0;
+  }
 }
 
 .section-spacer.active {
@@ -117,6 +133,9 @@
       background-color: #ededed;
       padding: 14px;
       @include transition();
+    }
+    .section-spacer-content {
+      opacity: 1;
     }
   }
 }
@@ -164,16 +183,18 @@
   cursor: grab;
   margin-left: 5px;
   margin-right: 5px;
+  overflow: hidden;
+  @include grab();
 }
 
 .section .drag {
-  width: 100px;
-  height: 150px;
+  height: 115px;
 }
 
 .drag.dragging {
   z-index: 1;
   pointer-events: none;
+  @include grabbing();
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.8);
 }
 
@@ -297,4 +318,33 @@ $light-gray: #dddddd;
   z-index: 1;
   pointer-events: none;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.8);
+
+}
+
+.super-large-icon {
+  font-size: 10em;
+}
+.center {
+  width: 100%;
+  display: block;
+  text-align: center;
+}
+.small-image-dragging {
+  max-height: 100px;
+  margin: 5px;
+}
+.small-text-dragging {
+  margin: 5px;
+  padding: 4px;
+  max-width: 100px;
+  max-height: 100px;
+  font-size: 4px;
+  color: black;
+  background-color: white;
+  overflow: hidden;
+  h4 {
+    font-size: 10px;
+    margin: 0;
+    padding: 0;
+  }
 }
