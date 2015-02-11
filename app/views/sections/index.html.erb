@@ -1,18 +1,8 @@
 <%= showcase_title(@showcase) %>
 
-
-<div class="row">
-  <div class="col-md-9">
-
-    <%= react_component 'ShowcaseEditor', {
-              itemsJSONPath: exhibit_items_path(@sections.exhibit, :json),
-              sectionsPath: exhibit_showcase_sections_path(@sections.exhibit, @sections.showcase),
-              sectionsJSONPath: exhibit_showcase_sections_path(@sections.exhibit, @sections.showcase, :json) },
-             {prerender: false }
-    %>
-  </div>
-
-  <div class="col-md-3">
-    <%= exhibit_nav(@showcase.exhibit, :showcases) %>
-  </div>
-</div>
+<%= react_component 'ShowcaseEditor', {
+          itemsJSONPath: exhibit_items_path(@sections.exhibit, :json),
+          sectionsPath: exhibit_showcase_sections_path(@sections.exhibit, @sections.showcase),
+          sectionsJSONPath: exhibit_showcase_sections_path(@sections.exhibit, @sections.showcase, :json) },
+         {prerender: false }
+%>

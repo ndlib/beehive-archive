@@ -9,7 +9,7 @@ describe CollectionRedirect do
 
     it "redirects to the exhibit" do
       expect(Exhibit).to receive("find_by").with({collection_id: 1}).and_return(:exhibit)
-      expect(subject).to eq("/exhibits/exhibit")
+      expect(subject).to eq("/exhibits/exhibit/showcases")
     end
   end
 

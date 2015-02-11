@@ -25,7 +25,7 @@ class CollectionRedirect
   end
 
   def exhibit_path(id)
-    h.exhibit_path(id)
+    h.exhibit_showcases_path(id)
   end
 
   def h
