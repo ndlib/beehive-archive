@@ -1,4 +1,5 @@
 <%= showcase_title(@showcase) %>
+<h2><%= @showcase.title %></h2>
 
 <%= react_component 'ShowcaseEditor', {
           itemsJSONPath: exhibit_items_path(@sections.exhibit, :json),

@@ -123,7 +123,6 @@ var ShowcaseEditor = React.createClass({
     }
     return (
     <div className={this.divclassname}>
-      <h2>Sections</h2>
       <div id="section-content-editor" className="sections-content"  onMouseMove={this.onMouseMove} onMouseOut={this.onMouseOut} >
         <SectionList sections={this.state.sections} onSectionClick={this.sectionClick} currentDragItem={this.state.currentDragItem} onDrop={this.onDrop} onDragStart={this.onDragStart} onDragStop={this.onDragStop} />
       </div>
