@@ -14,7 +14,11 @@ module API
       end
 
       def item
-        "#{Rails.configuration.honeycomb_url}/api/v1/collections/#{collection_id}/items/#{item_id}"
+        if (item_id)
+          "#{Rails.configuration.honeycomb_url}/api/v1/collections/#{collection_id}/items/#{item_id}"
+        else
+          nil
+        end
       end
 
       def showcase
