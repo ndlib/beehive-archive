@@ -30,7 +30,7 @@ class ExhibitsController < ApplicationController
     @exhibit = Exhibit.find(params[:id])
 
     if @exhibit.update_attributes(save_params)
-      redirect_to exhibits_path
+      redirect_to exhibit_showcases_path(@exhibit)
     else
       render :edit
     end
