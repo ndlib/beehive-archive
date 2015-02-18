@@ -5,17 +5,21 @@ var HoneypotImageMixin = {
     honeypot_image: React.PropTypes.object.isRequired,
     style: React.PropTypes.string,
   },
+
   getDefaultProps: function() {
     return {
       style: 'original'
     };
   },
+
   src: function() {
-    return this.style().src;
-  },
-  style: function() {
-    return _.find(this.props.honeypot_image.links.styles, function(style) {
-      return style.id == this.props.style;
-    }, this);
+    var imageObject;
+    if (this.props.style != 'original') {
+      imageObject = this.props.honeypot_image['thumbnail/' + this.props.style];
+    }
+    if (!imageObject) {
+      imageObject = this.props.honeypot_image;
+    }
+    return imageObject.contentUrl;
   },
 };

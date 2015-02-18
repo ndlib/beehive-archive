@@ -32,10 +32,11 @@ var ShowcaseEditor = React.createClass({
   handleItemDrop: function(item, index) {
     var image, section, sections, style_path, honeypot_image;
     honeypot_image = item.links.image;
-    style = _.find(honeypot_image.links.styles, function(style) {
-      return style.id == 'medium';
-    }, this);
-    image = style.src;
+    if (honeypot_image['thumbnail/medium']) {
+      image = honeypot_image['thumbnail/medium'].contentUrl;
+    } else {
+      image = honeypot_image.contentUrl;
+    }
 
     section = {
       id: 'new',
