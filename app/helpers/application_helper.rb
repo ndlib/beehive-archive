@@ -9,7 +9,7 @@ module ApplicationHelper
   end
 
   def showcase_title(showcase)
-    page_title(showcase.exhibit.title, showcase.title, exhibit_path(showcase.exhibit))
+    page_title(showcase.exhibit.title, showcase.title, exhibit_showcases_path(showcase.exhibit))
   end
 
   def exhibit_title(exhibit, sub_title = "")

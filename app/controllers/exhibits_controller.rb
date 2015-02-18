@@ -9,18 +9,14 @@ class ExhibitsController < ApplicationController
   end
 
   def new
-    if params[:collection_id]
-      @exhibit = Exhibit.new(collection_id: params[:collection_id])
-    else
-      @exhibit = Exhibit.new(collection_id: 1)
-    end
+    @exhibit = Exhibit.new(collection_id: params[:collection_id])
   end
 
   def create
     @exhibit = Exhibit.new(save_params)
 
     if @exhibit.save
-      redirect_to exhibits_path
+      redirect_to exhibit_showcases_path(@exhibit)
     else
       render :new
     end

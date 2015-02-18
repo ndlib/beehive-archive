@@ -16,7 +16,7 @@ class ShowcasesController < ApplicationController
     @showcase = exhibit.showcases.build(save_params)
 
     if @showcase.save
-      redirect_to exhibit_showcases_path(@showcase.exhibit)
+      redirect_to exhibit_showcase_sections_path(@showcase.exhibit, @showcase)
     else
       render :new
     end
@@ -30,7 +30,7 @@ class ShowcasesController < ApplicationController
     @showcase = exhibit.showcases.find(params[:id])
 
     if @showcase.update_attributes(save_params)
-      redirect_to exhibit_showcases_path(@showcase.exhibit)
+      redirect_to exhibit_showcase_sections_path(@showcase.exhibit, @showcase)
     else
       render :edit
     end

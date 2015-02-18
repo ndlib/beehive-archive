@@ -2,7 +2,11 @@
   <%# display_errors(@exhibit) %>
 
   <%= f.input :title, as: :string %>
-  <%= f.input :collection_id %>
+  <% if f.object.collection_id %>
+    <%= f.input :collection_id, as: :hidden %>
+  <% else %>
+    <%= f.input :collection_id %>
+  <% end %>
   <%= f.button :submit, :class => 'btn-primary', value: "Save" %>
   <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
                 exhibits_path, :class => 'btn btn-default' %>
