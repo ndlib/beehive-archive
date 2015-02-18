@@ -16,11 +16,11 @@ module ApplicationHelper
     page_title(exhibit.title, sub_title, exhibit_showcases_path(exhibit))
   end
 
-  def page_title(title, small_title = "", link_href = "")
+  def page_title(title, small_title = "", title_href = "")
     content_for(:page_title) do
       Waggle::PageTitle.new(title).display do | pt |
         pt.small_title = small_title
-        pt.link_href = link_href
+        pt.title_href = title_href
       end
     end
   end
